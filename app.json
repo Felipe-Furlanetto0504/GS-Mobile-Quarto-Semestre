@@ -53,6 +53,14 @@
     ],
     "experiments": {
       "typedRoutes": false
-    }
+    },
+    "extra": {
+      "commitHash": "7b00b8887abb24aa030c8bef05f4a302a99021a4",
+      "router": {},
+      "eas": {
+        "projectId": "8378d014-f647-4ba2-90fc-40e1c6ba6376"
+      }
+    },
+    "owner": "felipefurlanetto"
   }
 }
