@@ -10,7 +10,7 @@ import { cores, fontes, molas } from '../theme';
 function Aba({ rotulo, icone, ativa, badge, aoTocar, escuro }) {
   const progresso = useSharedValue(ativa ? 1 : 0);
   useEffect(() => {
-    progresso.value = withSpring(ativa ? 1 : 0, molas.suave);
+    progresso.set(withSpring(ativa ? 1 : 0, molas.suave));
   }, [ativa, progresso]);
 
   const estiloPilula = useAnimatedStyle(() => ({

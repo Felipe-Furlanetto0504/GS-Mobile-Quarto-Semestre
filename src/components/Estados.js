@@ -52,7 +52,7 @@ export function MensagemErro({ erro, aoTentarDeNovo, escuro }) {
 export function Esqueleto({ altura = 240, escuro }) {
   const opacidade = useSharedValue(0.5);
   useEffect(() => {
-    opacidade.value = withRepeat(withTiming(1, { duration: 700 }), -1, true);
+    opacidade.set(withRepeat(withTiming(1, { duration: 700 }), -1, true));
   }, [opacidade]);
   const estilo = useAnimatedStyle(() => ({ opacity: opacidade.value }));
   return (

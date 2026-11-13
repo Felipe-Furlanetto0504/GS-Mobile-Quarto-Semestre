@@ -12,7 +12,7 @@ import { cores, fontes, gravidades, molas, raio } from '../../../theme';
 function Segmento({ aceso, cor, ordem }) {
   const progresso = useSharedValue(0);
   useEffect(() => {
-    progresso.value = withDelay(ordem * 90, withSpring(aceso ? 1 : 0, molas.suave));
+    progresso.set(withDelay(ordem * 90, withSpring(aceso ? 1 : 0, molas.suave)));
   }, [aceso, ordem, progresso]);
   const estilo = useAnimatedStyle(() => ({ transform: [{ scaleX: progresso.value }] }));
   return (

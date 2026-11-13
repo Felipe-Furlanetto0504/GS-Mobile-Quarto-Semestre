@@ -46,11 +46,11 @@ export const Campo = forwardRef(function Campo(
           accessibilityLabel={rotulo}
           placeholderTextColor="#8A8F99"
           onFocus={(e) => {
-            foco.value = withTiming(1, { duration: 160 });
+            foco.set(withTiming(1, { duration: 160 }));
             props.onFocus?.(e);
           }}
           onBlur={(e) => {
-            foco.value = withTiming(0, { duration: 160 });
+            foco.set(withTiming(0, { duration: 160 }));
             props.onBlur?.(e);
           }}
           style={[estilos.input, multilinha && estilos.inputMultilinha]}

@@ -51,7 +51,7 @@ export default function BoasVindas() {
   const [pagina, setPagina] = useState(0);
 
   const aoRolar = useAnimatedScrollHandler((e) => {
-    rolagem.value = e.contentOffset.x;
+    rolagem.set(e.contentOffset.x);
   });
 
   const ultima = pagina === PAGINAS.length - 1;

@@ -49,11 +49,13 @@ export default function Login() {
     } catch (e) {
       setErro(e.response?.status === 401 ? 'E-mail ou senha incorretos.' : mensagemDeErro(e));
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error).catch(() => {});
-      tremor.value = withSequence(
-        withTiming(-10, { duration: 50 }),
-        withTiming(10, { duration: 50 }),
-        withTiming(-6, { duration: 50 }),
-        withTiming(0, { duration: 50 })
+      tremor.set(
+        withSequence(
+          withTiming(-10, { duration: 50 }),
+          withTiming(10, { duration: 50 }),
+          withTiming(-6, { duration: 50 }),
+          withTiming(0, { duration: 50 })
+        )
       );
       setEnviando(null);
     }

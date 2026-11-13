@@ -18,10 +18,8 @@ function LinhaDeScan({ altura }) {
   const posicao = useSharedValue(0);
   useEffect(() => {
     if (reduzir) return;
-    posicao.value = withRepeat(
-      withTiming(1, { duration: 1600, easing: Easing.inOut(Easing.quad) }),
-      -1,
-      true
+    posicao.set(
+      withRepeat(withTiming(1, { duration: 1600, easing: Easing.inOut(Easing.quad) }), -1, true)
     );
   }, [posicao, reduzir]);
   const estilo = useAnimatedStyle(() => ({

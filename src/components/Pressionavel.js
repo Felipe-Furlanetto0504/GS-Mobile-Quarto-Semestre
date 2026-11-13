@@ -23,11 +23,11 @@ export function Pressionavel({
       accessibilityRole={props.accessibilityRole ?? 'button'}
       accessibilityState={{ disabled: !!disabled, ...props.accessibilityState }}
       onPressIn={(e) => {
-        apertado.value = withSpring(escala, molas.toque);
+        apertado.set(withSpring(escala, molas.toque));
         onPressIn?.(e);
       }}
       onPressOut={(e) => {
-        apertado.value = withSpring(1, molas.toque);
+        apertado.set(withSpring(1, molas.toque));
         onPressOut?.(e);
       }}
       style={[style, estiloAnimado]}

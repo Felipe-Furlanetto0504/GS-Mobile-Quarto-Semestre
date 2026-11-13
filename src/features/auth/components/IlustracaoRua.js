@@ -16,7 +16,7 @@ import { cores, fontes } from '../../../theme';
 function Faixa({ ordem }) {
   const altura = useSharedValue(0);
   useEffect(() => {
-    altura.value = withDelay(ordem * 110, withTiming(44, { duration: 260 }));
+    altura.set(withDelay(ordem * 110, withTiming(44, { duration: 260 })));
   }, [altura, ordem]);
   const estilo = useAnimatedStyle(() => ({ height: altura.value }));
   return (
@@ -33,8 +33,8 @@ export function IlustracaoRua() {
 
   useEffect(() => {
     if (reduzir) return;
-    queda.value = withDelay(500, withSpring(0, { damping: 9, stiffness: 140 }));
-    sombra.value = withDelay(650, withTiming(1, { duration: 400 }));
+    queda.set(withDelay(500, withSpring(0, { damping: 9, stiffness: 140 })));
+    sombra.set(withDelay(650, withTiming(1, { duration: 400 })));
   }, [queda, sombra, reduzir]);
 
   const estiloPino = useAnimatedStyle(() => ({ transform: [{ translateY: queda.value }] }));

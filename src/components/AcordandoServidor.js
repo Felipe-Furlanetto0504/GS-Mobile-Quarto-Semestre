@@ -22,10 +22,12 @@ export function AcordandoServidor({ falhou, aoTentarDeNovo, aoContinuar }) {
 
   useEffect(() => {
     if (reduzir) return;
-    estrada.value = withRepeat(withTiming(1, { duration: 700, easing: Easing.linear }), -1);
-    pino.value = withRepeat(
-      withSequence(withTiming(-14, { duration: 380 }), withTiming(0, { duration: 380 })),
-      -1
+    estrada.set(withRepeat(withTiming(1, { duration: 700, easing: Easing.linear }), -1));
+    pino.set(
+      withRepeat(
+        withSequence(withTiming(-14, { duration: 380 }), withTiming(0, { duration: 380 })),
+        -1
+      )
     );
   }, [estrada, pino, reduzir]);
 
