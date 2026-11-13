@@ -2,8 +2,15 @@ import { StyleSheet, View } from 'react-native';
 import MapView, { Circle, Marker } from 'react-native-maps';
 import { cores, raio } from '../theme';
 
-
-export function Mapa({ centro, marcadores = [], raioKm, altura = 200, aoMoverPino, aoTocarMarcador, style }) {
+export function Mapa({
+  centro,
+  marcadores = [],
+  raioKm,
+  altura = 200,
+  aoMoverPino,
+  aoTocarMarcador,
+  style,
+}) {
   if (!centro) return <View style={[estilos.caixa, { height: altura }, style]} />;
 
   const delta = raioKm ? (raioKm / 111) * 2.6 : 0.008;
@@ -11,7 +18,12 @@ export function Mapa({ centro, marcadores = [], raioKm, altura = 200, aoMoverPin
     <View style={[estilos.caixa, { height: altura }, style]}>
       <MapView
         style={StyleSheet.absoluteFill}
-        initialRegion={{ latitude: centro.latitude, longitude: centro.longitude, latitudeDelta: delta, longitudeDelta: delta }}
+        initialRegion={{
+          latitude: centro.latitude,
+          longitude: centro.longitude,
+          latitudeDelta: delta,
+          longitudeDelta: delta,
+        }}
         showsPointsOfInterest={false}
         toolbarEnabled={false}
         onPress={aoMoverPino ? (e) => aoMoverPino(e.nativeEvent.coordinate) : undefined}

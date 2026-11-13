@@ -1,6 +1,11 @@
 import { forwardRef, useState } from 'react';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
-import Animated, { interpolateColor, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
+import Animated, {
+  interpolateColor,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from 'react-native-reanimated';
 import { Feather } from '@expo/vector-icons';
 import { Pressionavel } from './Pressionavel';
 import { cores, fontes, raio } from '../theme';
@@ -13,7 +18,9 @@ export const Campo = forwardRef(function Campo(
   const [mostrarSenha, setMostrarSenha] = useState(false);
 
   const estiloBorda = useAnimatedStyle(() => ({
-    borderColor: erro ? cores.perigo : interpolateColor(foco.value, [0, 1], [cores.linhaForte, cores.asfalto]),
+    borderColor: erro
+      ? cores.perigo
+      : interpolateColor(foco.value, [0, 1], [cores.linhaForte, cores.asfalto]),
     shadowOpacity: foco.value * 0.5,
   }));
 
@@ -80,7 +87,14 @@ const estilos = StyleSheet.create({
     shadowOffset: { width: 0, height: 0 },
   },
   caixaMultilinha: { alignItems: 'flex-start' },
-  input: { flex: 1, paddingHorizontal: 16, fontFamily: fontes.texto, fontSize: 15, color: cores.tinta, minHeight: 50 },
+  input: {
+    flex: 1,
+    paddingHorizontal: 16,
+    fontFamily: fontes.texto,
+    fontSize: 15,
+    color: cores.tinta,
+    minHeight: 50,
+  },
   inputMultilinha: { minHeight: 110, paddingTop: 14, textAlignVertical: 'top' },
   olho: { width: 48, height: 48, alignItems: 'center', justifyContent: 'center' },
   erro: { fontFamily: fontes.textoMedio, fontSize: 12, color: cores.perigo },

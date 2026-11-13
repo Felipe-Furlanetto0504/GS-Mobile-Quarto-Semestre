@@ -1,5 +1,14 @@
 import { useState } from 'react';
-import { ActivityIndicator, Alert, KeyboardAvoidingView, Platform, StyleSheet, Text, TextInput, View } from 'react-native';
+import {
+  ActivityIndicator,
+  Alert,
+  KeyboardAvoidingView,
+  Platform,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from 'react-native';
 import { router, useLocalSearchParams } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -86,8 +95,21 @@ export default function DetalheProblema() {
   const rolagem = useScrollViewOffset(refRolagem);
   const estiloFoto = useAnimatedStyle(() => ({
     transform: [
-      { translateY: interpolate(rolagem.value, [-ALTURA_FOTO, 0, ALTURA_FOTO], [-ALTURA_FOTO / 2, 0, ALTURA_FOTO * 0.6]) },
-      { scale: interpolate(rolagem.value, [-ALTURA_FOTO, 0, ALTURA_FOTO], [2, 1, 1], Extrapolation.CLAMP) },
+      {
+        translateY: interpolate(
+          rolagem.value,
+          [-ALTURA_FOTO, 0, ALTURA_FOTO],
+          [-ALTURA_FOTO / 2, 0, ALTURA_FOTO * 0.6]
+        ),
+      },
+      {
+        scale: interpolate(
+          rolagem.value,
+          [-ALTURA_FOTO, 0, ALTURA_FOTO],
+          [2, 1, 1],
+          Extrapolation.CLAMP
+        ),
+      },
     ],
   }));
 
@@ -113,7 +135,10 @@ export default function DetalheProblema() {
 
   const abrirMenu = () =>
     Alert.alert('Seu relato', 'Você pode editar ou excluir até o gestor adotar o problema.', [
-      { text: 'Editar', onPress: () => router.push({ pathname: '/problema/editar', params: { id: p.id } }) },
+      {
+        text: 'Editar',
+        onPress: () => router.push({ pathname: '/problema/editar', params: { id: p.id } }),
+      },
       {
         text: 'Excluir',
         style: 'destructive',
@@ -147,9 +172,16 @@ export default function DetalheProblema() {
   };
 
   return (
-    <KeyboardAvoidingView style={estilos.tela} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
+    <KeyboardAvoidingView
+      style={estilos.tela}
+      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+    >
       <StatusBar style="light" />
-      <Animated.ScrollView ref={refRolagem} scrollEventThrottle={16} contentContainerStyle={{ paddingBottom: 24 }}>
+      <Animated.ScrollView
+        ref={refRolagem}
+        scrollEventThrottle={16}
+        contentContainerStyle={{ paddingBottom: 24 }}
+      >
         <Animated.View style={[{ height: ALTURA_FOTO }, estiloFoto]}>
           <FotoProblema problema={p} altura={ALTURA_FOTO} analisando={!p.gravidadeIa} />
         </Animated.View>
@@ -166,7 +198,8 @@ export default function DetalheProblema() {
             </View>
             <Text style={estilos.titulo}>{p.titulo}</Text>
             <Text style={estilos.meta}>
-              {p.souAutor ? 'Você' : p.autor?.nome} · {p.comunidade?.nome} · {tempoRelativo(p.criadoEm)}
+              {p.souAutor ? 'Você' : p.autor?.nome} · {p.comunidade?.nome} ·{' '}
+              {tempoRelativo(p.criadoEm)}
             </Text>
             <Text style={estilos.descricao}>{p.descricao}</Text>
           </Animated.View>
@@ -188,7 +221,10 @@ export default function DetalheProblema() {
               carregando={adotar.isPending}
               onPress={() =>
                 adotar.mutate(p.id, {
-                  onSuccess: () => Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success).catch(() => {}),
+                  onSuccess: () =>
+                    Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success).catch(
+                      () => {}
+                    ),
                   onError: (e) => Alert.alert('Não foi possível adotar', mensagemDeErro(e)),
                 })
               }
@@ -196,13 +232,17 @@ export default function DetalheProblema() {
           ) : null}
 
           <View style={{ gap: 12 }}>
-            <Text style={estilos.secao}>Observações dos vizinhos · {observacoes.data?.length ?? p.totalObservacoes}</Text>
+            <Text style={estilos.secao}>
+              Observações dos vizinhos · {observacoes.data?.length ?? p.totalObservacoes}
+            </Text>
             {observacoes.isLoading ? <ActivityIndicator color={cores.tinta} /> : null}
             {(observacoes.data ?? []).map((obs, i) => (
               <Observacao key={obs.id} obs={obs} problemaId={p.id} indice={i} />
             ))}
             {observacoes.data?.length === 0 ? (
-              <Text style={estilos.semObs}>Ninguém comentou ainda. Viu algo a mais? Conte aqui embaixo.</Text>
+              <Text style={estilos.semObs}>
+                Ninguém comentou ainda. Viu algo a mais? Conte aqui embaixo.
+              </Text>
             ) : null}
           </View>
         </View>
@@ -210,11 +250,19 @@ export default function DetalheProblema() {
 
       {/* Botões flutuando sobre a foto */}
       <View style={[estilos.barraTopo, { top: insets.top + 8 }]} pointerEvents="box-none">
-        <Pressionavel onPress={() => router.back()} accessibilityLabel="Voltar" style={estilos.botaoFoto}>
+        <Pressionavel
+          onPress={() => router.back()}
+          accessibilityLabel="Voltar"
+          style={estilos.botaoFoto}
+        >
           <Feather name="chevron-left" size={22} color={cores.papel} />
         </Pressionavel>
         {podeEditar ? (
-          <Pressionavel onPress={abrirMenu} accessibilityLabel="Editar ou excluir seu relato" style={estilos.botaoFoto}>
+          <Pressionavel
+            onPress={abrirMenu}
+            accessibilityLabel="Editar ou excluir seu relato"
+            style={estilos.botaoFoto}
+          >
             <Feather name="more-horizontal" size={22} color={cores.papel} />
           </Pressionavel>
         ) : null}
@@ -233,8 +281,17 @@ export default function DetalheProblema() {
           onSubmitEditing={enviarObservacao}
         />
         {texto.trim() ? (
-          <Pressionavel onPress={enviarObservacao} disabled={adicionar.isPending} accessibilityLabel="Enviar observação" style={estilos.enviar}>
-            {adicionar.isPending ? <ActivityIndicator color={cores.amarelo} /> : <Feather name="send" size={18} color={cores.amarelo} />}
+          <Pressionavel
+            onPress={enviarObservacao}
+            disabled={adicionar.isPending}
+            accessibilityLabel="Enviar observação"
+            style={estilos.enviar}
+          >
+            {adicionar.isPending ? (
+              <ActivityIndicator color={cores.amarelo} />
+            ) : (
+              <Feather name="send" size={18} color={cores.amarelo} />
+            )}
           </Pressionavel>
         ) : !ehGestor ? (
           <BotaoApoio problema={p} compacto />
@@ -256,14 +313,32 @@ const estilos = StyleSheet.create({
     gap: 22,
   },
   chips: { flexDirection: 'row', gap: 8, flexWrap: 'wrap' },
-  chipCategoria: { paddingHorizontal: 10, paddingVertical: 5, borderRadius: 999, backgroundColor: cores.papel2 },
+  chipCategoria: {
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    borderRadius: 999,
+    backgroundColor: cores.papel2,
+  },
   chipCategoriaTexto: { fontFamily: fontes.textoBold, fontSize: 11, color: cores.tintaMedia },
-  titulo: { fontFamily: fontes.titulo, fontSize: 25, lineHeight: 29, letterSpacing: -0.5, color: cores.tinta },
+  titulo: {
+    fontFamily: fontes.titulo,
+    fontSize: 25,
+    lineHeight: 29,
+    letterSpacing: -0.5,
+    color: cores.tinta,
+  },
   meta: { fontFamily: fontes.textoMedio, fontSize: 13, color: cores.suave },
   descricao: { fontFamily: fontes.texto, fontSize: 15, lineHeight: 22, color: cores.tintaMedia },
   secao: { fontFamily: fontes.textoBold, fontSize: 14, color: cores.tinta },
   obs: { flexDirection: 'row', gap: 10, alignItems: 'flex-start' },
-  avatar: { width: 34, height: 34, borderRadius: 17, backgroundColor: cores.papel2, alignItems: 'center', justifyContent: 'center' },
+  avatar: {
+    width: 34,
+    height: 34,
+    borderRadius: 17,
+    backgroundColor: cores.papel2,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   avatarTexto: { fontFamily: fontes.textoBold, fontSize: 13, color: cores.tinta },
   balao: {
     flex: 1,
@@ -282,7 +357,13 @@ const estilos = StyleSheet.create({
   obsTexto: { fontFamily: fontes.texto, fontSize: 14, lineHeight: 20, color: cores.tintaMedia },
   obsExcluir: { fontFamily: fontes.textoSemi, fontSize: 12, color: cores.perigo },
   semObs: { fontFamily: fontes.texto, fontSize: 13, color: cores.suave },
-  barraTopo: { position: 'absolute', left: 16, right: 16, flexDirection: 'row', justifyContent: 'space-between' },
+  barraTopo: {
+    position: 'absolute',
+    left: 16,
+    right: 16,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
   botaoFoto: {
     width: 44,
     height: 44,
@@ -313,5 +394,12 @@ const estilos = StyleSheet.create({
     fontSize: 14,
     color: cores.tinta,
   },
-  enviar: { width: 48, height: 48, borderRadius: 14, backgroundColor: cores.asfalto, alignItems: 'center', justifyContent: 'center' },
+  enviar: {
+    width: 48,
+    height: 48,
+    borderRadius: 14,
+    backgroundColor: cores.asfalto,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 });

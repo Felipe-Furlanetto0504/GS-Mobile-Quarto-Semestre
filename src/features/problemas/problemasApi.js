@@ -1,8 +1,10 @@
 import { Platform } from 'react-native';
 import { api } from '../../services/api';
 
-
-export async function publicarProblema(comunidadeId, { titulo, descricao, latitude, longitude, foto }) {
+export async function publicarProblema(
+  comunidadeId,
+  { titulo, descricao, latitude, longitude, foto }
+) {
   const form = new FormData();
   form.append('titulo', titulo);
   form.append('descricao', descricao);
@@ -26,7 +28,9 @@ export async function publicarProblema(comunidadeId, { titulo, descricao, latitu
 }
 
 export async function buscarFeed(comunidadeId, { ordem = 'recentes', page = 0, size = 10 } = {}) {
-  const { data } = await api.get(`/comunidades/${comunidadeId}/problemas`, { params: { ordem, page, size } });
+  const { data } = await api.get(`/comunidades/${comunidadeId}/problemas`, {
+    params: { ordem, page, size },
+  });
   return data;
 }
 
@@ -43,7 +47,6 @@ export async function editarProblema(id, { titulo, descricao }) {
 export async function excluirProblema(id) {
   await api.delete(`/problemas/${id}`);
 }
-
 
 export async function alternarApoio(id) {
   const { data } = await api.post(`/problemas/${id}/apoios`);
@@ -64,7 +67,6 @@ export async function excluirObservacao(observacaoId) {
   await api.delete(`/observacoes/${observacaoId}`);
 }
 
-
 export async function buscarTriagem({ page = 0, size = 20 } = {}) {
   const { data } = await api.get('/triagem', { params: { page, size } });
   return data;
@@ -80,6 +82,8 @@ export async function reclassificarProblema(id) {
 }
 
 export async function buscarSupervisionados(comunidadeId, { page = 0, size = 20 } = {}) {
-  const { data } = await api.get(`/comunidades/${comunidadeId}/supervisionados`, { params: { page, size } });
+  const { data } = await api.get(`/comunidades/${comunidadeId}/supervisionados`, {
+    params: { page, size },
+  });
   return data;
 }

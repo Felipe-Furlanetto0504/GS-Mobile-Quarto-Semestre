@@ -28,7 +28,8 @@ export function FeedDaComunidade({ comunidade, cabecalho, espacoInferior = 24 })
   const destaque = listaComunicados.find((c) => c.destacado);
   const problemas = feed.data?.pages.flatMap((p) => p.content) ?? [];
 
-  const atualizando = aba === 'problemas' ? feed.isRefetching && !feed.isFetchingNextPage : comunicados.isRefetching;
+  const atualizando =
+    aba === 'problemas' ? feed.isRefetching && !feed.isFetchingNextPage : comunicados.isRefetching;
   const atualizar = () => (aba === 'problemas' ? feed.refetch() : comunicados.refetch());
 
   const topo = (
@@ -53,7 +54,9 @@ export function FeedDaComunidade({ comunidade, cabecalho, espacoInferior = 24 })
           icone="plus"
           variante="destaque"
           pequeno
-          onPress={() => router.push({ pathname: '/comunicado/novo', params: { comunidadeId: comunidade.id } })}
+          onPress={() =>
+            router.push({ pathname: '/comunicado/novo', params: { comunidadeId: comunidade.id } })
+          }
         />
       ) : null}
     </View>
@@ -75,10 +78,16 @@ export function FeedDaComunidade({ comunidade, cabecalho, espacoInferior = 24 })
       titulo="Nenhum problema por aqui"
       texto="Viu algo na rua? Publique com uma foto e a vizinhança apoia."
       acao={podeGerenciar ? undefined : 'Publicar problema'}
-      aoAcionar={() => router.push({ pathname: '/problema/novo', params: { comunidadeId: comunidade.id } })}
+      aoAcionar={() =>
+        router.push({ pathname: '/problema/novo', params: { comunidadeId: comunidade.id } })
+      }
     />
   ) : (
-    <EstadoVazio icone="volume-2" titulo="Sem comunicados" texto="Os avisos do gestor aparecem aqui." />
+    <EstadoVazio
+      icone="volume-2"
+      titulo="Sem comunicados"
+      texto="Os avisos do gestor aparecem aqui."
+    />
   );
 
   return (
@@ -95,12 +104,21 @@ export function FeedDaComunidade({ comunidade, cabecalho, espacoInferior = 24 })
       ListHeaderComponent={topo}
       ListEmptyComponent={vazio}
       ListFooterComponent={
-        feed.isFetchingNextPage ? <ActivityIndicator color={cores.tinta} style={{ marginVertical: 16 }} /> : null
+        feed.isFetchingNextPage ? (
+          <ActivityIndicator color={cores.tinta} style={{ marginVertical: 16 }} />
+        ) : null
       }
-      onEndReached={() => aba === 'problemas' && feed.hasNextPage && !feed.isFetchingNextPage && feed.fetchNextPage()}
+      onEndReached={() =>
+        aba === 'problemas' && feed.hasNextPage && !feed.isFetchingNextPage && feed.fetchNextPage()
+      }
       onEndReachedThreshold={0.4}
       refreshControl={
-        <RefreshControl refreshing={!!atualizando} onRefresh={atualizar} tintColor={cores.tinta} colors={[cores.asfalto]} />
+        <RefreshControl
+          refreshing={!!atualizando}
+          onRefresh={atualizar}
+          tintColor={cores.tinta}
+          colors={[cores.asfalto]}
+        />
       }
       contentContainerStyle={[estilos.conteudo, { paddingBottom: espacoInferior }]}
       showsVerticalScrollIndicator={false}

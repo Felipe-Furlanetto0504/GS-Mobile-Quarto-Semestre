@@ -31,7 +31,11 @@ function Aba({ rotulo, icone, ativa, badge, aoTocar, escuro }) {
     >
       <View style={estilos.iconeAba}>
         <Animated.View
-          style={[estilos.pilula, { backgroundColor: escuro ? cores.asfalto3 : cores.amareloClaro }, estiloPilula]}
+          style={[
+            estilos.pilula,
+            { backgroundColor: escuro ? cores.asfalto3 : cores.amareloClaro },
+            estiloPilula,
+          ]}
         />
         <Feather name={icone} size={21} color={ativa ? corAtiva : corInativa} />
         {badge ? (
@@ -40,7 +44,13 @@ function Aba({ rotulo, icone, ativa, badge, aoTocar, escuro }) {
           </View>
         ) : null}
       </View>
-      <Text style={[estilos.rotulo, { color: ativa ? corAtiva : corInativa }, ativa && { fontFamily: fontes.textoBold }]}>
+      <Text
+        style={[
+          estilos.rotulo,
+          { color: ativa ? corAtiva : corInativa },
+          ativa && { fontFamily: fontes.textoBold },
+        ]}
+      >
         {rotulo}
       </Text>
     </Pressionavel>
@@ -49,7 +59,9 @@ function Aba({ rotulo, icone, ativa, badge, aoTocar, escuro }) {
 
 export function BarraDeAbas({ state, descriptors, navigation, acaoCentral, escuro }) {
   const insets = useSafeAreaInsets();
-  const rotas = state.routes.filter((r) => descriptors[r.key].options.tabBarItemStyle?.display !== 'none');
+  const rotas = state.routes.filter(
+    (r) => descriptors[r.key].options.tabBarItemStyle?.display !== 'none'
+  );
   const metade = Math.ceil(rotas.length / 2);
 
   const renderAba = (rota) => {
@@ -64,7 +76,11 @@ export function BarraDeAbas({ state, descriptors, navigation, acaoCentral, escur
         ativa={ativa}
         escuro={escuro}
         aoTocar={() => {
-          const evento = navigation.emit({ type: 'tabPress', target: rota.key, canPreventDefault: true });
+          const evento = navigation.emit({
+            type: 'tabPress',
+            target: rota.key,
+            canPreventDefault: true,
+          });
           if (!ativa && !evento.defaultPrevented) {
             Haptics.selectionAsync().catch(() => {});
             navigation.navigate(rota.name);

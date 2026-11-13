@@ -16,7 +16,10 @@ export default function ComunidadeDetalhe() {
 
   return (
     <SafeAreaView style={estilos.tela} edges={['top']}>
-      <Cabecalho titulo={c?.nome ?? 'Comunidade'} subtitulo={c ? plural(c.totalMembros, 'membro', 'membros') : undefined} />
+      <Cabecalho
+        titulo={c?.nome ?? 'Comunidade'}
+        subtitulo={c ? plural(c.totalMembros, 'membro', 'membros') : undefined}
+      />
       {consulta.isLoading ? (
         <View style={{ padding: 20 }}>
           <Esqueleto altura={90} />
@@ -42,6 +45,17 @@ export default function ComunidadeDetalhe() {
 
 const estilos = StyleSheet.create({
   tela: { flex: 1, backgroundColor: cores.papel },
-  descricao: { backgroundColor: cores.branco, borderRadius: raio.lg, borderWidth: 1.5, borderColor: cores.linha, padding: 14 },
-  descricaoTexto: { fontFamily: fontes.texto, fontSize: 14, lineHeight: 20, color: cores.tintaMedia },
+  descricao: {
+    backgroundColor: cores.branco,
+    borderRadius: raio.lg,
+    borderWidth: 1.5,
+    borderColor: cores.linha,
+    padding: 14,
+  },
+  descricaoTexto: {
+    fontFamily: fontes.texto,
+    fontSize: 14,
+    lineHeight: 20,
+    color: cores.tintaMedia,
+  },
 });

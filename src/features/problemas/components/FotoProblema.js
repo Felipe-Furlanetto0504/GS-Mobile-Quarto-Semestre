@@ -18,9 +18,15 @@ function LinhaDeScan({ altura }) {
   const posicao = useSharedValue(0);
   useEffect(() => {
     if (reduzir) return;
-    posicao.value = withRepeat(withTiming(1, { duration: 1600, easing: Easing.inOut(Easing.quad) }), -1, true);
+    posicao.value = withRepeat(
+      withTiming(1, { duration: 1600, easing: Easing.inOut(Easing.quad) }),
+      -1,
+      true
+    );
   }, [posicao, reduzir]);
-  const estilo = useAnimatedStyle(() => ({ transform: [{ translateY: posicao.value * (altura - 4) }] }));
+  const estilo = useAnimatedStyle(() => ({
+    transform: [{ translateY: posicao.value * (altura - 4) }],
+  }));
   return (
     <View style={StyleSheet.absoluteFill} pointerEvents="none">
       <View style={[StyleSheet.absoluteFill, { backgroundColor: 'rgba(20,23,31,0.25)' }]} />
@@ -29,7 +35,14 @@ function LinhaDeScan({ altura }) {
   );
 }
 
-export function FotoProblema({ problema, altura = 160, uriLocal, analisando, arredondado = 0, style }) {
+export function FotoProblema({
+  problema,
+  altura = 160,
+  uriLocal,
+  analisando,
+  arredondado = 0,
+  style,
+}) {
   const [falhou, setFalhou] = useState(false);
   const temFoto = uriLocal || (problema?.temFoto && !falhou);
 
@@ -37,7 +50,9 @@ export function FotoProblema({ problema, altura = 160, uriLocal, analisando, arr
     <View style={[estilos.caixa, { height: altura, borderRadius: arredondado }, style]}>
       {temFoto ? (
         <Image
-          source={uriLocal ? { uri: uriLocal } : { uri: urlFoto(problema.id), headers: cabecalhosAuth() }}
+          source={
+            uriLocal ? { uri: uriLocal } : { uri: urlFoto(problema.id), headers: cabecalhosAuth() }
+          }
           style={StyleSheet.absoluteFill}
           contentFit="cover"
           transition={250}

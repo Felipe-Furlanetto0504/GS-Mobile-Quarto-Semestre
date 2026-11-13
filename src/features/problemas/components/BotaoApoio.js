@@ -28,7 +28,9 @@ export function BotaoApoio({ problema, compacto }) {
     setTotal(problema.totalApoios);
   }, [problema.apoiadoPorMim, problema.totalApoios]);
 
-  const estiloIcone = useAnimatedStyle(() => ({ transform: [{ scale: pulo.value }, { rotate: `${(pulo.value - 1) * -40}deg` }] }));
+  const estiloIcone = useAnimatedStyle(() => ({
+    transform: [{ scale: pulo.value }, { rotate: `${(pulo.value - 1) * -40}deg` }],
+  }));
 
   const alternar = () => {
     const novo = !apoiado;
@@ -36,7 +38,9 @@ export function BotaoApoio({ problema, compacto }) {
     setApoiado(novo);
     setTotal((t) => t + (novo ? 1 : -1));
     pulo.value = withSequence(withSpring(1.35, molas.pulo), withSpring(1, molas.pulo));
-    Haptics.impactAsync(novo ? Haptics.ImpactFeedbackStyle.Light : Haptics.ImpactFeedbackStyle.Soft).catch(() => {});
+    Haptics.impactAsync(
+      novo ? Haptics.ImpactFeedbackStyle.Light : Haptics.ImpactFeedbackStyle.Soft
+    ).catch(() => {});
     mutacao.mutate(problema.id, {
       onSuccess: (r) => {
         setApoiado(r.apoiadoPorMim);
@@ -56,7 +60,11 @@ export function BotaoApoio({ problema, compacto }) {
     <Pressionavel
       onPress={alternar}
       escala={0.92}
-      accessibilityLabel={apoiado ? `Retirar apoio, ${total} apoios` : `Apoiar, também sofri com isso, ${total} apoios`}
+      accessibilityLabel={
+        apoiado
+          ? `Retirar apoio, ${total} apoios`
+          : `Apoiar, também sofri com isso, ${total} apoios`
+      }
       accessibilityState={{ selected: apoiado }}
       style={[
         estilos.botao,
@@ -67,7 +75,9 @@ export function BotaoApoio({ problema, compacto }) {
       <Animated.View style={estiloIcone}>
         <Feather name="thumbs-up" size={16} color={cor} />
       </Animated.View>
-      {!compacto ? <Text style={[estilos.texto, { color: cor }]}>{apoiado ? 'Apoiado' : 'Também sofri'}</Text> : null}
+      {!compacto ? (
+        <Text style={[estilos.texto, { color: cor }]}>{apoiado ? 'Apoiado' : 'Também sofri'}</Text>
+      ) : null}
       <View style={estilos.numeroCaixa}>
         <Animated.Text
           key={total}

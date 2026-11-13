@@ -11,7 +11,14 @@ import { cores, fontes } from '../../src/theme';
 // O gestor já cria a primeira comunidade junto com a conta.
 export default function CadastroGestor() {
   const { registrarGestor } = useAuth();
-  const [form, setForm] = useState({ nome: '', email: '', senha: '', organizacao: '', comunidade: '', descricao: '' });
+  const [form, setForm] = useState({
+    nome: '',
+    email: '',
+    senha: '',
+    organizacao: '',
+    comunidade: '',
+    descricao: '',
+  });
   const [local, setLocal] = useState({ endereco: '', latitude: null, longitude: null });
   const [erros, setErros] = useState({});
   const [erroGeral, setErroGeral] = useState(null);
@@ -68,12 +75,27 @@ export default function CadastroGestor() {
       descricao="Associações de bairro e secretarias recebem a fila de problemas priorizada pela IA."
       rodape={
         <>
-          {erroGeral ? <Text style={{ fontFamily: fontes.textoSemi, color: cores.perigo, fontSize: 13 }}>{erroGeral}</Text> : null}
-          <Botao titulo="Criar conta e comunidade" icone="arrow-right" onPress={enviar} carregando={enviando} />
+          {erroGeral ? (
+            <Text style={{ fontFamily: fontes.textoSemi, color: cores.perigo, fontSize: 13 }}>
+              {erroGeral}
+            </Text>
+          ) : null}
+          <Botao
+            titulo="Criar conta e comunidade"
+            icone="arrow-right"
+            onPress={enviar}
+            carregando={enviando}
+          />
         </>
       }
     >
-      <Campo rotulo="Seu nome" valor={form.nome} aoMudar={mudar('nome')} erro={erros.nome} maximo={120} />
+      <Campo
+        rotulo="Seu nome"
+        valor={form.nome}
+        aoMudar={mudar('nome')}
+        erro={erros.nome}
+        maximo={120}
+      />
       <Campo
         rotulo="E-mail"
         valor={form.email}
@@ -91,7 +113,11 @@ export default function CadastroGestor() {
         placeholder="Ex.: Associação de Moradores da Bela Vista"
         maximo={150}
       />
-      <Text style={{ fontFamily: fontes.textoBold, fontSize: 16, color: cores.tinta, marginTop: 8 }}>Primeira comunidade</Text>
+      <Text
+        style={{ fontFamily: fontes.textoBold, fontSize: 16, color: cores.tinta, marginTop: 8 }}
+      >
+        Primeira comunidade
+      </Text>
       <Campo
         rotulo="Nome da comunidade"
         valor={form.comunidade}
@@ -100,7 +126,13 @@ export default function CadastroGestor() {
         placeholder="Ex.: Bela Vista - Av. Paulista"
         maximo={120}
       />
-      <Campo rotulo="Descrição (opcional)" valor={form.descricao} aoMudar={mudar('descricao')} maximo={500} multilinha />
+      <Campo
+        rotulo="Descrição (opcional)"
+        valor={form.descricao}
+        aoMudar={mudar('descricao')}
+        maximo={500}
+        multilinha
+      />
       <SeletorDeLocal
         rotulo="Centro da comunidade"
         local={local}

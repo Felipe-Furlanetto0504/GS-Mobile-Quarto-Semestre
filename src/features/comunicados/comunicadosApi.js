@@ -1,12 +1,18 @@
 import { api } from '../../services/api';
 
 export async function buscarComunicados(comunidadeId, { page = 0, size = 20 } = {}) {
-  const { data } = await api.get(`/comunidades/${comunidadeId}/comunicados`, { params: { page, size } });
+  const { data } = await api.get(`/comunidades/${comunidadeId}/comunicados`, {
+    params: { page, size },
+  });
   return data;
 }
 
 export async function publicarComunicado(comunidadeId, { titulo, texto, destacado }) {
-  const { data } = await api.post(`/comunidades/${comunidadeId}/comunicados`, { titulo, texto, destacado });
+  const { data } = await api.post(`/comunidades/${comunidadeId}/comunicados`, {
+    titulo,
+    texto,
+    destacado,
+  });
   return data;
 }
 

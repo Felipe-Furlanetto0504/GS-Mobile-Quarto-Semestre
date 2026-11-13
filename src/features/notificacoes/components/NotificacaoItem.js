@@ -1,7 +1,13 @@
 import { StyleSheet, Text, View } from 'react-native';
 import { router } from 'expo-router';
 import ReanimatedSwipeable from 'react-native-gesture-handler/ReanimatedSwipeable';
-import Animated, { FadeInDown, FadeOutLeft, LinearTransition, interpolate, useAnimatedStyle } from 'react-native-reanimated';
+import Animated, {
+  FadeInDown,
+  FadeOutLeft,
+  LinearTransition,
+  interpolate,
+  useAnimatedStyle,
+} from 'react-native-reanimated';
 import { Feather } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
 import { Pressionavel } from '../../../components/Pressionavel';
@@ -59,15 +65,30 @@ export function NotificacaoItem({ notificacao, indice = 0 }) {
           accessibilityHint="Arraste para a esquerda para excluir"
           style={[estilos.item, !n.lida && estilos.naoLida]}
         >
-          <View style={[estilos.icone, { backgroundColor: alta ? cores.asfalto : cores.amareloClaro }]}>
-            <Feather name={alta ? 'alert-circle' : 'bell'} size={19} color={alta ? cores.amarelo : '#7A5A00'} />
+          <View
+            style={[estilos.icone, { backgroundColor: alta ? cores.asfalto : cores.amareloClaro }]}
+          >
+            <Feather
+              name={alta ? 'alert-circle' : 'bell'}
+              size={19}
+              color={alta ? cores.amarelo : '#7A5A00'}
+            />
           </View>
           <View style={{ flex: 1, gap: 3 }}>
             <View style={estilos.linhaTopo}>
-              <Text style={[estilos.prioridade, alta && { color: '#A52A21' }]}>{alta ? 'Prioridade alta' : 'Aviso'}</Text>
+              <Text style={[estilos.prioridade, alta && { color: '#A52A21' }]}>
+                {alta ? 'Prioridade alta' : 'Aviso'}
+              </Text>
               <Text style={estilos.quando}>{tempoRelativo(n.criadaEm)}</Text>
             </View>
-            <Text style={[estilos.mensagem, n.lida && { fontFamily: fontes.texto, color: cores.tintaMedia }]}>{n.mensagem}</Text>
+            <Text
+              style={[
+                estilos.mensagem,
+                n.lida && { fontFamily: fontes.texto, color: cores.tintaMedia },
+              ]}
+            >
+              {n.mensagem}
+            </Text>
           </View>
           {!n.lida ? <View style={estilos.pontoNaoLida} /> : null}
         </Pressionavel>
@@ -89,12 +110,30 @@ const estilos = StyleSheet.create({
     borderColor: cores.linha,
   },
   naoLida: { backgroundColor: cores.branco, borderColor: cores.asfalto },
-  icone: { width: 40, height: 40, borderRadius: 12, alignItems: 'center', justifyContent: 'center' },
+  icone: {
+    width: 40,
+    height: 40,
+    borderRadius: 12,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   linhaTopo: { flexDirection: 'row', justifyContent: 'space-between', gap: 8 },
-  prioridade: { fontFamily: fontes.textoBold, fontSize: 11, letterSpacing: 0.6, color: cores.suave, textTransform: 'uppercase' },
+  prioridade: {
+    fontFamily: fontes.textoBold,
+    fontSize: 11,
+    letterSpacing: 0.6,
+    color: cores.suave,
+    textTransform: 'uppercase',
+  },
   quando: { fontFamily: fontes.texto, fontSize: 12, color: cores.suave },
   mensagem: { fontFamily: fontes.textoSemi, fontSize: 14, lineHeight: 19, color: cores.tinta },
-  pontoNaoLida: { width: 8, height: 8, borderRadius: 4, backgroundColor: cores.perigo, marginTop: 6 },
+  pontoNaoLida: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    backgroundColor: cores.perigo,
+    marginTop: 6,
+  },
   acaoExcluir: { width: 110, alignItems: 'center', justifyContent: 'center' },
   acaoConteudo: { alignItems: 'center', gap: 4 },
   acaoTexto: { fontFamily: fontes.textoBold, fontSize: 12, color: cores.branco },

@@ -4,9 +4,10 @@ import * as Location from 'expo-location';
 function montarEndereco(lugar) {
   if (!lugar) return '';
   const rua = [lugar.street, lugar.streetNumber].filter(Boolean).join(', ');
-  return [rua || lugar.name, lugar.district, lugar.city || lugar.subregion].filter(Boolean).join(' - ');
+  return [rua || lugar.name, lugar.district, lugar.city || lugar.subregion]
+    .filter(Boolean)
+    .join(' - ');
 }
-
 
 export function useLocalizacao() {
   const [buscando, setBuscando] = useState(false);
@@ -30,19 +31,18 @@ export function useLocalizacao() {
     }
   }
 
-
   const obterAtual = () =>
     executar(async () => {
       await pedirPermissao();
-      const posicao = await Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.Balanced });
+      const posicao = await Location.getCurrentPositionAsync({
+        accuracy: Location.Accuracy.Balanced,
+      });
       const { latitude, longitude } = posicao.coords;
       let endereco = '';
       try {
         const [lugar] = await Location.reverseGeocodeAsync({ latitude, longitude });
         endereco = montarEndereco(lugar);
-      } catch {
-       
-      }
+      } catch {}
       return { latitude, longitude, endereco };
     });
 

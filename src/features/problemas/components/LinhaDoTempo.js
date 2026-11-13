@@ -14,14 +14,23 @@ export function LinhaDoTempo({ problema }) {
       <View style={estilos.linha}>
         {ETAPAS.flatMap((nome, i) => {
           const bolinha = (
-            <View key={nome} style={[estilos.bolinha, i < atual && estilos.feita, i === atual && estilos.atual]}>
+            <View
+              key={nome}
+              style={[estilos.bolinha, i < atual && estilos.feita, i === atual && estilos.atual]}
+            >
               {i < atual || (i === atual && i === ETAPAS.length - 1) ? (
                 <Feather name="check" size={13} color={cores.amarelo} />
               ) : null}
             </View>
           );
           if (i === ETAPAS.length - 1) return [bolinha];
-          return [bolinha, <View key={`${nome}-traco`} style={[estilos.traco, i < atual && { backgroundColor: cores.asfalto }]} />];
+          return [
+            bolinha,
+            <View
+              key={`${nome}-traco`}
+              style={[estilos.traco, i < atual && { backgroundColor: cores.asfalto }]}
+            />,
+          ];
         })}
       </View>
       <View style={estilos.rotulos}>

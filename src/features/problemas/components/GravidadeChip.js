@@ -6,13 +6,22 @@ export function GravidadeChip({ gravidade, prefixo = 'IA · ', escuro, style }) 
   const g = gravidades[gravidade];
   if (!g) {
     return (
-      <Animated.View style={[estilos.chip, { backgroundColor: escuro ? cores.asfalto3 : 'rgba(20,23,31,0.75)' }, style]}>
+      <Animated.View
+        style={[
+          estilos.chip,
+          { backgroundColor: escuro ? cores.asfalto3 : 'rgba(20,23,31,0.75)' },
+          style,
+        ]}
+      >
         <Text style={[estilos.texto, { color: cores.papel }]}>IA analisando…</Text>
       </Animated.View>
     );
   }
   return (
-    <Animated.View entering={ZoomIn.springify().damping(12)} style={[estilos.chip, { backgroundColor: g.fundo }, style]}>
+    <Animated.View
+      entering={ZoomIn.springify().damping(12)}
+      style={[estilos.chip, { backgroundColor: g.fundo }, style]}
+    >
       <Text style={[estilos.texto, { color: g.texto }]}>
         {prefixo}
         {g.rotulo.toUpperCase()}

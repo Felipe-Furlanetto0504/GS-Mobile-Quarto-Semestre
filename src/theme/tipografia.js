@@ -1,4 +1,3 @@
-
 export const fontes = {
   titulo: 'Archivo_800ExtraBold',
   tituloBold: 'Archivo_700Bold',
@@ -16,5 +15,10 @@ export const texto = {
   corpo: { fontFamily: fontes.texto, fontSize: 15, lineHeight: 22 },
   corpoForte: { fontFamily: fontes.textoSemi, fontSize: 15, lineHeight: 22 },
   pequeno: { fontFamily: fontes.textoMedio, fontSize: 13, lineHeight: 18 },
-  rotulo: { fontFamily: fontes.textoBold, fontSize: 11, letterSpacing: 1.2, textTransform: 'uppercase' },
+  rotulo: {
+    fontFamily: fontes.textoBold,
+    fontSize: 11,
+    letterSpacing: 1.2,
+    textTransform: 'uppercase',
+  },
 };

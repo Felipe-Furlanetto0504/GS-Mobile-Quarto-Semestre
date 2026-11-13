@@ -1,6 +1,11 @@
 import { useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import Animated, { useAnimatedStyle, useSharedValue, withDelay, withSpring } from 'react-native-reanimated';
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withDelay,
+  withSpring,
+} from 'react-native-reanimated';
 import { Feather } from '@expo/vector-icons';
 import { cores, fontes, gravidades, molas, raio } from '../../../theme';
 
@@ -33,14 +38,22 @@ export function AnaliseIA({ problema }) {
       <View
         style={estilos.medidor}
         accessible
-        accessibilityLabel={g ? `Gravidade ${g.rotulo}, nível ${g.nivel} de 4` : 'Gravidade ainda em análise'}
+        accessibilityLabel={
+          g ? `Gravidade ${g.rotulo}, nível ${g.nivel} de 4` : 'Gravidade ainda em análise'
+        }
       >
         {ordem.map((chave, i) => (
-          <Segmento key={chave} ordem={i} aceso={!!g && i < g.nivel} cor={gravidades[chave].barra} />
+          <Segmento
+            key={chave}
+            ordem={i}
+            aceso={!!g && i < g.nivel}
+            cor={gravidades[chave].barra}
+          />
         ))}
       </View>
       <Text style={estilos.justificativa}>
-        {problema.justificativaIa ?? 'A IA está olhando a foto e a descrição. O resultado aparece aqui em alguns segundos.'}
+        {problema.justificativaIa ??
+          'A IA está olhando a foto e a descrição. O resultado aparece aqui em alguns segundos.'}
       </Text>
     </View>
   );
@@ -50,10 +63,22 @@ const estilos = StyleSheet.create({
   card: { backgroundColor: cores.asfalto, borderRadius: raio.xl, padding: 16, gap: 12 },
   topo: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
   titulo: { flexDirection: 'row', alignItems: 'center', gap: 8 },
-  rotulo: { fontFamily: fontes.textoBold, fontSize: 12, letterSpacing: 1.2, color: cores.amarelo, textTransform: 'uppercase' },
+  rotulo: {
+    fontFamily: fontes.textoBold,
+    fontSize: 12,
+    letterSpacing: 1.2,
+    color: cores.amarelo,
+    textTransform: 'uppercase',
+  },
   nivel: { fontFamily: fontes.textoSemi, fontSize: 13, color: cores.papel },
   medidor: { flexDirection: 'row', gap: 6 },
-  trilho: { flex: 1, height: 8, borderRadius: 4, backgroundColor: cores.asfalto3, overflow: 'hidden' },
+  trilho: {
+    flex: 1,
+    height: 8,
+    borderRadius: 4,
+    backgroundColor: cores.asfalto3,
+    overflow: 'hidden',
+  },
   preenchimento: { flex: 1, borderRadius: 4, transformOrigin: 'left' },
   justificativa: { fontFamily: fontes.texto, fontSize: 13, lineHeight: 20, color: '#D5D8DE' },
 });

@@ -5,14 +5,43 @@ import { Pressionavel } from './Pressionavel';
 import { cores, fontes, raio } from '../theme';
 
 const variantes = {
-  primario: { fundo: cores.asfalto, texto: cores.papel, icone: cores.amarelo, borda: cores.asfalto },
-  destaque: { fundo: cores.amarelo, texto: cores.asfalto, icone: cores.asfalto, borda: cores.amarelo },
-  contorno: { fundo: cores.branco, texto: cores.tinta, icone: cores.tinta, borda: cores.linhaForte },
-  contornoEscuro: { fundo: 'transparent', texto: cores.papel, icone: cores.papel, borda: cores.linhaEscura },
+  primario: {
+    fundo: cores.asfalto,
+    texto: cores.papel,
+    icone: cores.amarelo,
+    borda: cores.asfalto,
+  },
+  destaque: {
+    fundo: cores.amarelo,
+    texto: cores.asfalto,
+    icone: cores.asfalto,
+    borda: cores.amarelo,
+  },
+  contorno: {
+    fundo: cores.branco,
+    texto: cores.tinta,
+    icone: cores.tinta,
+    borda: cores.linhaForte,
+  },
+  contornoEscuro: {
+    fundo: 'transparent',
+    texto: cores.papel,
+    icone: cores.papel,
+    borda: cores.linhaEscura,
+  },
   perigo: { fundo: '#FCE3E0', texto: '#A52A21', icone: '#A52A21', borda: '#FCE3E0' },
 };
 
-export function Botao({ titulo, onPress, variante = 'primario', icone, carregando, desabilitado, pequeno, style }) {
+export function Botao({
+  titulo,
+  onPress,
+  variante = 'primario',
+  icone,
+  carregando,
+  desabilitado,
+  pequeno,
+  style,
+}) {
   const v = variantes[variante];
   const inativo = desabilitado || carregando;
 
@@ -35,7 +64,9 @@ export function Botao({ titulo, onPress, variante = 'primario', icone, carregand
         <ActivityIndicator color={v.texto} />
       ) : (
         <View style={estilos.conteudo}>
-          <Text style={[estilos.texto, pequeno && estilos.textoPequeno, { color: v.texto }]}>{titulo}</Text>
+          <Text style={[estilos.texto, pequeno && estilos.textoPequeno, { color: v.texto }]}>
+            {titulo}
+          </Text>
           {icone ? <Feather name={icone} size={pequeno ? 16 : 18} color={v.icone} /> : null}
         </View>
       )}

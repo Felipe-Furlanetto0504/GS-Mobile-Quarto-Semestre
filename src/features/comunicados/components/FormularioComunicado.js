@@ -29,7 +29,13 @@ export function FormularioComunicado({ titulo, inicial, aoSalvar, salvando, erro
       iconeVoltar="x"
       rodape={<Botao titulo="Publicar" icone="send" onPress={salvar} carregando={salvando} />}
     >
-      <Campo rotulo="Título" valor={form.titulo} aoMudar={(v) => setForm({ ...form, titulo: v })} maximo={120} erro={todos.titulo} />
+      <Campo
+        rotulo="Título"
+        valor={form.titulo}
+        aoMudar={(v) => setForm({ ...form, titulo: v })}
+        maximo={120}
+        erro={todos.titulo}
+      />
       <Campo
         rotulo="Texto"
         valor={form.texto}

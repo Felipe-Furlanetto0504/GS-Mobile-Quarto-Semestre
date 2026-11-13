@@ -80,7 +80,9 @@ export function useAlternarApoio() {
     mutationFn: problemasApi.alternarApoio,
     onSuccess: (resposta) => {
       queryClient.setQueryData(['problema', String(resposta.problemaId)], (antigo) =>
-        antigo ? { ...antigo, totalApoios: resposta.totalApoios, apoiadoPorMim: resposta.apoiadoPorMim } : antigo
+        antigo
+          ? { ...antigo, totalApoios: resposta.totalApoios, apoiadoPorMim: resposta.apoiadoPorMim }
+          : antigo
       );
       queryClient.invalidateQueries({ queryKey: ['feed'], refetchType: 'inactive' });
       queryClient.invalidateQueries({ queryKey: ['triagem'] });
@@ -109,10 +111,16 @@ export function useExcluirObservacao(id) {
 
 export function useAdotarProblema() {
   const atualizar = useAtualizarListas();
-  return useMutation({ mutationFn: problemasApi.adotarProblema, onSuccess: (p) => atualizar(p.id) });
+  return useMutation({
+    mutationFn: problemasApi.adotarProblema,
+    onSuccess: (p) => atualizar(p.id),
+  });
 }
 
 export function useReclassificar() {
   const atualizar = useAtualizarListas();
-  return useMutation({ mutationFn: problemasApi.reclassificarProblema, onSuccess: (_, id) => atualizar(id) });
+  return useMutation({
+    mutationFn: problemasApi.reclassificarProblema,
+    onSuccess: (_, id) => atualizar(id),
+  });
 }

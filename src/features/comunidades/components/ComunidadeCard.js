@@ -27,14 +27,19 @@ export function ComunidadeCard({ comunidade, indice = 0 }) {
     });
 
   const aoSair = () =>
-    Alert.alert(`Sair de ${c.nome}?`, 'Você deixa de ver o feed e de receber avisos desta comunidade.', [
-      { text: 'Cancelar', style: 'cancel' },
-      {
-        text: 'Sair',
-        style: 'destructive',
-        onPress: () => sair.mutate(c.id, { onError: (e) => Alert.alert('Não deu certo', mensagemDeErro(e)) }),
-      },
-    ]);
+    Alert.alert(
+      `Sair de ${c.nome}?`,
+      'Você deixa de ver o feed e de receber avisos desta comunidade.',
+      [
+        { text: 'Cancelar', style: 'cancel' },
+        {
+          text: 'Sair',
+          style: 'destructive',
+          onPress: () =>
+            sair.mutate(c.id, { onError: (e) => Alert.alert('Não deu certo', mensagemDeErro(e)) }),
+        },
+      ]
+    );
 
   const abrir = () => {
     if (c.souGestor) return router.push(`/comunidade/${c.id}`);
@@ -44,16 +49,23 @@ export function ComunidadeCard({ comunidade, indice = 0 }) {
 
   return (
     <Animated.View
-      entering={FadeInDown.delay(Math.min(indice, 6) * 60).springify().damping(16)}
+      entering={FadeInDown.delay(Math.min(indice, 6) * 60)
+        .springify()
+        .damping(16)}
       layout={LinearTransition.springify()}
       style={[estilos.card, (c.participo || c.souGestor) && estilos.cardAtivo]}
     >
-      <Pressionavel onPress={c.participo || c.souGestor ? abrir : undefined} disabled={!c.participo && !c.souGestor} escala={0.985}>
+      <Pressionavel
+        onPress={c.participo || c.souGestor ? abrir : undefined}
+        disabled={!c.participo && !c.souGestor}
+        escala={0.985}
+      >
         <View style={estilos.topo}>
           <View style={{ flex: 1, gap: 4 }}>
             <Text style={estilos.nome}>{c.nome}</Text>
             <Text style={estilos.meta}>
-              {c.gestor?.organizacao || c.gestor?.nome} · {plural(c.totalMembros, 'membro', 'membros')}
+              {c.gestor?.organizacao || c.gestor?.nome} ·{' '}
+              {plural(c.totalMembros, 'membro', 'membros')}
             </Text>
           </View>
           {c.distanciaKm != null ? (
@@ -74,10 +86,23 @@ export function ComunidadeCard({ comunidade, indice = 0 }) {
       ) : c.participo ? (
         <View style={estilos.linhaBotoes}>
           <Botao titulo="Abrir feed" pequeno onPress={abrir} style={{ flex: 1 }} />
-          <Botao titulo="Sair" variante="contorno" pequeno onPress={aoSair} carregando={sair.isPending} />
+          <Botao
+            titulo="Sair"
+            variante="contorno"
+            pequeno
+            onPress={aoSair}
+            carregando={sair.isPending}
+          />
         </View>
       ) : (
-        <Botao titulo="Entrar na comunidade" variante="destaque" icone="plus" pequeno onPress={aoEntrar} carregando={entrar.isPending} />
+        <Botao
+          titulo="Entrar na comunidade"
+          variante="destaque"
+          icone="plus"
+          pequeno
+          onPress={aoEntrar}
+          carregando={entrar.isPending}
+        />
       )}
       {c.participo ? (
         <View style={estilos.participa}>
@@ -103,8 +128,19 @@ const estilos = StyleSheet.create({
   topo: { flexDirection: 'row', gap: 12, alignItems: 'flex-start' },
   nome: { fontFamily: fontes.textoBold, fontSize: 16, color: cores.tinta },
   meta: { fontFamily: fontes.texto, fontSize: 13, color: cores.suave },
-  descricao: { fontFamily: fontes.texto, fontSize: 13, lineHeight: 19, color: cores.tintaMedia, marginTop: 8 },
-  distancia: { backgroundColor: cores.asfalto, borderRadius: 999, paddingHorizontal: 10, paddingVertical: 4 },
+  descricao: {
+    fontFamily: fontes.texto,
+    fontSize: 13,
+    lineHeight: 19,
+    color: cores.tintaMedia,
+    marginTop: 8,
+  },
+  distancia: {
+    backgroundColor: cores.asfalto,
+    borderRadius: 999,
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+  },
   distanciaTexto: { fontFamily: fontes.textoBold, fontSize: 12, color: cores.amarelo },
   linhaBotoes: { flexDirection: 'row', gap: 10 },
   participa: { flexDirection: 'row', alignItems: 'center', gap: 6 },

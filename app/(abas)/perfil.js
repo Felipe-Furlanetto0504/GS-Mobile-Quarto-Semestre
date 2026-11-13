@@ -57,7 +57,9 @@ export default function Perfil() {
           <Linha icone="home" rotulo="Endereço" valor={usuario?.endereco} />
           <Linha
             icone="users"
-            rotulo={ehGestor ? 'Comunidades que você gerencia' : 'Comunidades em que você participa'}
+            rotulo={
+              ehGestor ? 'Comunidades que você gerencia' : 'Comunidades em que você participa'
+            }
             valor={minhas.data ? String(minhas.data.length) : '…'}
           />
         </Animated.View>
@@ -77,7 +79,13 @@ export default function Perfil() {
 const estilos = StyleSheet.create({
   tela: { flex: 1, backgroundColor: cores.papel },
   conteudo: { padding: 20, gap: 16, paddingBottom: 40 },
-  cartao: { backgroundColor: cores.asfalto, borderRadius: raio.xl, padding: 24, alignItems: 'center', gap: 10 },
+  cartao: {
+    backgroundColor: cores.asfalto,
+    borderRadius: raio.xl,
+    padding: 24,
+    alignItems: 'center',
+    gap: 10,
+  },
   avatar: {
     width: 76,
     height: 76,
@@ -88,9 +96,25 @@ const estilos = StyleSheet.create({
   },
   avatarTexto: { fontFamily: fontes.titulo, fontSize: 28, color: cores.asfalto },
   nome: { fontFamily: fontes.titulo, fontSize: 22, color: cores.papel, textAlign: 'center' },
-  perfil: { paddingHorizontal: 12, paddingVertical: 4, borderRadius: 999, backgroundColor: cores.asfalto3 },
-  perfilTexto: { fontFamily: fontes.textoBold, fontSize: 12, color: cores.amarelo, letterSpacing: 0.6 },
-  bloco: { backgroundColor: cores.branco, borderRadius: raio.xl, borderWidth: 1.5, borderColor: cores.linha, padding: 6 },
+  perfil: {
+    paddingHorizontal: 12,
+    paddingVertical: 4,
+    borderRadius: 999,
+    backgroundColor: cores.asfalto3,
+  },
+  perfilTexto: {
+    fontFamily: fontes.textoBold,
+    fontSize: 12,
+    color: cores.amarelo,
+    letterSpacing: 0.6,
+  },
+  bloco: {
+    backgroundColor: cores.branco,
+    borderRadius: raio.xl,
+    borderWidth: 1.5,
+    borderColor: cores.linha,
+    padding: 6,
+  },
   linha: { flexDirection: 'row', gap: 12, padding: 12, alignItems: 'center' },
   linhaRotulo: { fontFamily: fontes.texto, fontSize: 12, color: cores.suave },
   linhaValor: { fontFamily: fontes.textoSemi, fontSize: 14, color: cores.tinta },

@@ -1,4 +1,3 @@
-
 export const cores = {
   asfalto: '#14171F',
   asfalto2: '#1F2430',

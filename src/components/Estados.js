@@ -18,8 +18,20 @@ export function EstadoVazio({ icone = 'inbox', titulo, texto, acao, aoAcionar, e
         <Feather name={icone} size={26} color={escuro ? cores.amarelo : cores.tinta} />
       </View>
       <Text style={[estilos.tituloVazio, escuro && { color: cores.papel }]}>{titulo}</Text>
-      {texto ? <Text style={[estilos.textoVazio, escuro && { color: cores.textoClaroSuave }]}>{texto}</Text> : null}
-      {acao ? <Botao titulo={acao} onPress={aoAcionar} pequeno variante="destaque" style={{ marginTop: 8 }} /> : null}
+      {texto ? (
+        <Text style={[estilos.textoVazio, escuro && { color: cores.textoClaroSuave }]}>
+          {texto}
+        </Text>
+      ) : null}
+      {acao ? (
+        <Botao
+          titulo={acao}
+          onPress={aoAcionar}
+          pequeno
+          variante="destaque"
+          style={{ marginTop: 8 }}
+        />
+      ) : null}
     </Animated.View>
   );
 }
@@ -45,7 +57,11 @@ export function Esqueleto({ altura = 240, escuro }) {
   const estilo = useAnimatedStyle(() => ({ opacity: opacidade.value }));
   return (
     <Animated.View
-      style={[estilos.esqueleto, { height: altura, backgroundColor: escuro ? cores.asfalto2 : cores.papel2 }, estilo]}
+      style={[
+        estilos.esqueleto,
+        { height: altura, backgroundColor: escuro ? cores.asfalto2 : cores.papel2 },
+        estilo,
+      ]}
     />
   );
 }
@@ -61,7 +77,18 @@ const estilos = StyleSheet.create({
     justifyContent: 'center',
     marginBottom: 6,
   },
-  tituloVazio: { fontFamily: fontes.textoBold, fontSize: 17, color: cores.tinta, textAlign: 'center' },
-  textoVazio: { fontFamily: fontes.texto, fontSize: 14, color: cores.suave, textAlign: 'center', lineHeight: 20 },
+  tituloVazio: {
+    fontFamily: fontes.textoBold,
+    fontSize: 17,
+    color: cores.tinta,
+    textAlign: 'center',
+  },
+  textoVazio: {
+    fontFamily: fontes.texto,
+    fontSize: 14,
+    color: cores.suave,
+    textAlign: 'center',
+    lineHeight: 20,
+  },
   esqueleto: { borderRadius: raio.xl, marginBottom: 14 },
 });

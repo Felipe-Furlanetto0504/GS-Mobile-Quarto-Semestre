@@ -43,7 +43,14 @@ export default function EditarProblema() {
 
   if (consulta.isLoading) {
     return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: cores.papel }}>
+      <View
+        style={{
+          flex: 1,
+          alignItems: 'center',
+          justifyContent: 'center',
+          backgroundColor: cores.papel,
+        }}
+      >
         <ActivityIndicator color={cores.tinta} />
       </View>
     );
@@ -55,10 +62,24 @@ export default function EditarProblema() {
       iconeVoltar="x"
       tituloGrande="Ajuste o seu relato"
       descricao="A foto e o local não mudam. Depois que o gestor adotar, não dá mais para editar."
-      rodape={<Botao titulo="Salvar alterações" icone="check" onPress={salvar} carregando={editar.isPending} />}
+      rodape={
+        <Botao
+          titulo="Salvar alterações"
+          icone="check"
+          onPress={salvar}
+          carregando={editar.isPending}
+        />
+      }
     >
       <Campo rotulo="Título" valor={titulo} aoMudar={setTitulo} maximo={120} erro={erros.titulo} />
-      <Campo rotulo="Descrição" valor={descricao} aoMudar={setDescricao} maximo={1000} multilinha erro={erros.descricao} />
+      <Campo
+        rotulo="Descrição"
+        valor={descricao}
+        aoMudar={setDescricao}
+        maximo={1000}
+        multilinha
+        erro={erros.descricao}
+      />
     </TelaFormulario>
   );
 }

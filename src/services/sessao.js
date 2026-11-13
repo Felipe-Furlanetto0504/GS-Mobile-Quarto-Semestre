@@ -1,7 +1,6 @@
 import { Platform } from 'react-native';
 import * as SecureStore from 'expo-secure-store';
 
-
 const CHAVE = 'rootfix.sessao';
 
 async function ler() {
@@ -40,7 +39,6 @@ export async function carregarSessao() {
     return null;
   }
 }
-
 
 export async function salvarSessao(resposta) {
   const sessao = {

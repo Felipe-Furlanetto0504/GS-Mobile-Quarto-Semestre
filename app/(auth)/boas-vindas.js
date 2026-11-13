@@ -65,10 +65,18 @@ export default function BoasVindas() {
       <StatusBar style="light" />
       <View style={estilos.topo}>
         <View style={estilos.marca}>
-          <Image source={require('../../assets/images/logo.png')} style={estilos.logo} contentFit="contain" />
+          <Image
+            source={require('../../assets/images/logo.png')}
+            style={estilos.logo}
+            contentFit="contain"
+          />
           <Text style={estilos.marcaTexto}>RootFix</Text>
         </View>
-        <Pressionavel onPress={() => router.push('/login')} style={estilos.pular} accessibilityLabel="Pular apresentação">
+        <Pressionavel
+          onPress={() => router.push('/login')}
+          style={estilos.pular}
+          accessibilityLabel="Pular apresentação"
+        >
           <Text style={estilos.pularTexto}>Pular</Text>
         </Pressionavel>
       </View>
@@ -101,8 +109,19 @@ export default function BoasVindas() {
           ))}
         </View>
         <View style={estilos.botoes}>
-          <Botao titulo="Já tenho conta" variante="contornoEscuro" onPress={() => router.push('/login')} style={{ flex: 1 }} />
-          <Botao titulo={ultima ? 'Começar' : 'Próximo'} variante="destaque" icone="arrow-right" onPress={avancar} style={{ flex: 1 }} />
+          <Botao
+            titulo="Já tenho conta"
+            variante="contornoEscuro"
+            onPress={() => router.push('/login')}
+            style={{ flex: 1 }}
+          />
+          <Botao
+            titulo={ultima ? 'Começar' : 'Próximo'}
+            variante="destaque"
+            icone="arrow-right"
+            onPress={avancar}
+            style={{ flex: 1 }}
+          />
         </View>
       </View>
     </SafeAreaView>
@@ -111,15 +130,33 @@ export default function BoasVindas() {
 
 const estilos = StyleSheet.create({
   tela: { flex: 1, backgroundColor: cores.asfalto },
-  topo: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 24, paddingTop: 8 },
+  topo: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 24,
+    paddingTop: 8,
+  },
   marca: { flexDirection: 'row', alignItems: 'center', gap: 8 },
   logo: { width: 30, height: 30 },
   marcaTexto: { fontFamily: fontes.titulo, fontSize: 20, color: cores.papel },
   pular: { padding: 12 },
   pularTexto: { fontFamily: fontes.textoSemi, fontSize: 14, color: cores.textoClaroSuave },
   pagina: { width: LARGURA, paddingHorizontal: 24, paddingTop: 28, gap: 10 },
-  sobrelinha: { fontFamily: fontes.textoBold, fontSize: 12, letterSpacing: 1.6, color: cores.amarelo, textTransform: 'uppercase' },
-  titulo: { fontFamily: fontes.titulo, fontSize: 30, lineHeight: 34, letterSpacing: -0.7, color: cores.papel },
+  sobrelinha: {
+    fontFamily: fontes.textoBold,
+    fontSize: 12,
+    letterSpacing: 1.6,
+    color: cores.amarelo,
+    textTransform: 'uppercase',
+  },
+  titulo: {
+    fontFamily: fontes.titulo,
+    fontSize: 30,
+    lineHeight: 34,
+    letterSpacing: -0.7,
+    color: cores.papel,
+  },
   texto: { fontFamily: fontes.texto, fontSize: 15, lineHeight: 22, color: cores.textoClaroSuave },
   rodape: { paddingHorizontal: 24, paddingBottom: 16, gap: 18 },
   pontos: { flexDirection: 'row', gap: 6 },

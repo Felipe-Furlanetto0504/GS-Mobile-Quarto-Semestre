@@ -14,7 +14,12 @@ export default function EditarComunicado() {
   const comunicado = lista.data?.content.find((c) => String(c.id) === String(id));
 
   if (!comunicado) {
-    return <EstadoVazio icone="loader" titulo={lista.isLoading ? 'Carregando…' : 'Comunicado não encontrado'} />;
+    return (
+      <EstadoVazio
+        icone="loader"
+        titulo={lista.isLoading ? 'Carregando…' : 'Comunicado não encontrado'}
+      />
+    );
   }
 
   return (

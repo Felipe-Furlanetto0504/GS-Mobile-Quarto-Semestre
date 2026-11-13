@@ -23,7 +23,9 @@ export function ComunidadeAtualProvider({ children }) {
     [lista, minhas.isLoading, idEscolhido]
   );
 
-  return <ComunidadeAtualContext.Provider value={valor}>{children}</ComunidadeAtualContext.Provider>;
+  return (
+    <ComunidadeAtualContext.Provider value={valor}>{children}</ComunidadeAtualContext.Provider>
+  );
 }
 
 export function useComunidadeAtual() {

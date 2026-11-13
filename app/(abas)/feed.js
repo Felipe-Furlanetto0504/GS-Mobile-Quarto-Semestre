@@ -41,7 +41,9 @@ function TrocarComunidade({ aberto, aoFechar }) {
             }}
             style={estilos.opcao}
           >
-            <Text style={[estilos.opcaoTexto, { color: cores.azul }]}>Encontrar outras comunidades</Text>
+            <Text style={[estilos.opcaoTexto, { color: cores.azul }]}>
+              Encontrar outras comunidades
+            </Text>
             <Feather name="arrow-right" size={18} color={cores.azul} />
           </Pressionavel>
         </Animated.View>
@@ -119,9 +121,20 @@ export default function Feed() {
 const estilos = StyleSheet.create({
   tela: { flex: 1, backgroundColor: cores.papel },
   cabecalho: { flexDirection: 'row', alignItems: 'center', gap: 12, paddingTop: 8 },
-  sobrelinha: { fontFamily: fontes.textoSemi, fontSize: 12, letterSpacing: 0.4, color: cores.suave },
+  sobrelinha: {
+    fontFamily: fontes.textoSemi,
+    fontSize: 12,
+    letterSpacing: 0.4,
+    color: cores.suave,
+  },
   nomeLinha: { flexDirection: 'row', alignItems: 'center', gap: 6 },
-  nome: { fontFamily: fontes.titulo, fontSize: 21, letterSpacing: -0.3, color: cores.tinta, flexShrink: 1 },
+  nome: {
+    fontFamily: fontes.titulo,
+    fontSize: 21,
+    letterSpacing: -0.3,
+    color: cores.tinta,
+    flexShrink: 1,
+  },
   sino: {
     width: 44,
     height: 44,
@@ -144,8 +157,22 @@ const estilos = StyleSheet.create({
     borderColor: cores.branco,
   },
   fundoModal: { flex: 1, backgroundColor: 'rgba(20,23,31,0.45)', justifyContent: 'flex-end' },
-  folha: { backgroundColor: cores.papel, borderTopLeftRadius: 28, borderTopRightRadius: 28, padding: 20, paddingBottom: 36, gap: 8 },
-  alca: { alignSelf: 'center', width: 40, height: 5, borderRadius: 3, backgroundColor: cores.linhaForte, marginBottom: 6 },
+  folha: {
+    backgroundColor: cores.papel,
+    borderTopLeftRadius: 28,
+    borderTopRightRadius: 28,
+    padding: 20,
+    paddingBottom: 36,
+    gap: 8,
+  },
+  alca: {
+    alignSelf: 'center',
+    width: 40,
+    height: 5,
+    borderRadius: 3,
+    backgroundColor: cores.linhaForte,
+    marginBottom: 6,
+  },
   folhaTitulo: { fontFamily: fontes.titulo, fontSize: 20, color: cores.tinta, marginBottom: 6 },
   opcao: {
     minHeight: 52,

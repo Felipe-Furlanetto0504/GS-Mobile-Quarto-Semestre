@@ -38,10 +38,17 @@ export function IlustracaoRua() {
   }, [queda, sombra, reduzir]);
 
   const estiloPino = useAnimatedStyle(() => ({ transform: [{ translateY: queda.value }] }));
-  const estiloSombra = useAnimatedStyle(() => ({ opacity: sombra.value, transform: [{ scaleX: sombra.value }] }));
+  const estiloSombra = useAnimatedStyle(() => ({
+    opacity: sombra.value,
+    transform: [{ scaleX: sombra.value }],
+  }));
 
   return (
-    <View style={estilos.caixa} accessibilityElementsHidden importantForAccessibility="no-hide-descendants">
+    <View
+      style={estilos.caixa}
+      accessibilityElementsHidden
+      importantForAccessibility="no-hide-descendants"
+    >
       <View style={estilos.calcada} />
       <View style={estilos.rua}>
         {[0, 1, 2, 3, 4].map((i) => (
@@ -54,7 +61,10 @@ export function IlustracaoRua() {
           <View style={estilos.pinoMiolo} />
         </View>
       </Animated.View>
-      <Animated.View entering={FadeInLeft.delay(1100).springify()} style={[estilos.balao, { left: 20, top: 40 }]}>
+      <Animated.View
+        entering={FadeInLeft.delay(1100).springify()}
+        style={[estilos.balao, { left: 20, top: 40 }]}
+      >
         <Feather name="thumbs-up" size={14} color={cores.asfalto} />
         <Text style={estilos.balaoTexto}>Vizinhos apoiam</Text>
       </Animated.View>
@@ -62,7 +72,9 @@ export function IlustracaoRua() {
         entering={FadeInRight.delay(1350).springify()}
         style={[estilos.balao, { right: 20, top: 200, backgroundColor: '#FCE3E0' }]}
       >
-        <Text style={[estilos.balaoTexto, { color: '#A52A21', fontFamily: fontes.textoBold }]}>GRAVIDADE ALTA · IA</Text>
+        <Text style={[estilos.balaoTexto, { color: '#A52A21', fontFamily: fontes.textoBold }]}>
+          GRAVIDADE ALTA · IA
+        </Text>
       </Animated.View>
     </View>
   );
@@ -70,7 +82,14 @@ export function IlustracaoRua() {
 
 const estilos = StyleSheet.create({
   caixa: { height: 330, alignItems: 'center' },
-  calcada: { position: 'absolute', top: 30, left: 0, right: 0, bottom: 0, backgroundColor: cores.asfalto2 },
+  calcada: {
+    position: 'absolute',
+    top: 30,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: cores.asfalto2,
+  },
   rua: {
     position: 'absolute',
     top: 30,

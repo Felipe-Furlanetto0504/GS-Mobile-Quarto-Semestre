@@ -1,11 +1,14 @@
 import { Alert, FlatList, RefreshControl, StyleSheet, Text, View } from 'react-native';
-import { router } from 'expo-router';
+import { router, useIsFocused } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import { useIsFocused } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Animated, { FadeInDown, LinearTransition, SlideOutRight } from 'react-native-reanimated';
 import * as Haptics from 'expo-haptics';
-import { useAdotarProblema, useReclassificar, useTriagem } from '../../src/features/problemas/useProblemas';
+import {
+  useAdotarProblema,
+  useReclassificar,
+  useTriagem,
+} from '../../src/features/problemas/useProblemas';
 import { FotoProblema } from '../../src/features/problemas/components/FotoProblema';
 import { GravidadeChip } from '../../src/features/problemas/components/GravidadeChip';
 import { Pressionavel } from '../../src/components/Pressionavel';
@@ -29,19 +32,32 @@ function ItemTriagem({ problema, indice, primeiro }) {
 
   const aoAdotar = () =>
     adotar.mutate(problema.id, {
-      onSuccess: () => Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success).catch(() => {}),
+      onSuccess: () =>
+        Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success).catch(() => {}),
       onError: (e) => Alert.alert('Não foi possível adotar', mensagemDeErro(e)),
     });
 
   return (
     <Animated.View
-      entering={FadeInDown.delay(Math.min(indice, 6) * 60).springify().damping(16)}
+      entering={FadeInDown.delay(Math.min(indice, 6) * 60)
+        .springify()
+        .damping(16)}
       exiting={SlideOutRight.duration(260)}
       layout={LinearTransition.springify().damping(18)}
       style={[estilos.item, primeiro && estilos.itemPrimeiro]}
     >
-      <Pressionavel onPress={() => router.push(`/problema/${problema.id}`)} escala={0.985} style={estilos.itemTopo}>
-        <FotoProblema problema={problema} altura={68} arredondado={14} style={{ width: 68 }} analisando={!problema.gravidadeIa} />
+      <Pressionavel
+        onPress={() => router.push(`/problema/${problema.id}`)}
+        escala={0.985}
+        style={estilos.itemTopo}
+      >
+        <FotoProblema
+          problema={problema}
+          altura={68}
+          arredondado={14}
+          style={{ width: 68 }}
+          analisando={!problema.gravidadeIa}
+        />
         <View style={{ flex: 1, gap: 4 }}>
           <View style={estilos.linhaChips}>
             <GravidadeChip gravidade={problema.gravidadeIa} prefixo="" escuro={!primeiro} />
@@ -74,7 +90,11 @@ function ItemTriagem({ problema, indice, primeiro }) {
           carregando={reclassificar.isPending}
           onPress={() =>
             reclassificar.mutate(problema.id, {
-              onSuccess: () => Alert.alert('Pedido enviado', 'A IA vai analisar a foto de novo em alguns segundos.'),
+              onSuccess: () =>
+                Alert.alert(
+                  'Pedido enviado',
+                  'A IA vai analisar a foto de novo em alguns segundos.'
+                ),
               onError: (e) => Alert.alert('Não deu certo', mensagemDeErro(e)),
             })
           }
@@ -99,13 +119,18 @@ export default function Triagem() {
       <View style={estilos.contadores}>
         {CONTADORES.map((c) => (
           <View key={c.chave} style={[estilos.contador, { backgroundColor: c.fundo }]}>
-            <NumeroAnimado valor={dados?.[c.chave] ?? 0} style={[estilos.contadorNumero, { color: c.cor }]} />
+            <NumeroAnimado
+              valor={dados?.[c.chave] ?? 0}
+              style={[estilos.contadorNumero, { color: c.cor }]}
+            />
             <Text style={[estilos.contadorRotulo, { color: c.texto }]}>{c.rotulo}</Text>
           </View>
         ))}
       </View>
       <Text style={estilos.ajuda}>
-        {dados?.semClassificacao ? `${plural(dados.semClassificacao, 'problema', 'problemas')} ainda sem classificação · ` : ''}
+        {dados?.semClassificacao
+          ? `${plural(dados.semClassificacao, 'problema', 'problemas')} ainda sem classificação · `
+          : ''}
         Ordenado por gravidade e apoios
       </Text>
     </View>
@@ -117,7 +142,9 @@ export default function Triagem() {
       <FlatList
         data={fila}
         keyExtractor={(p) => String(p.id)}
-        renderItem={({ item, index }) => <ItemTriagem problema={item} indice={index} primeiro={index === 0} />}
+        renderItem={({ item, index }) => (
+          <ItemTriagem problema={item} indice={index} primeiro={index === 0} />
+        )}
         ListHeaderComponent={topo}
         ListEmptyComponent={
           consulta.isLoading ? (
@@ -126,13 +153,27 @@ export default function Triagem() {
               <Esqueleto altura={150} escuro />
             </View>
           ) : consulta.error ? (
-            <MensagemErro erro={mensagemDeErro(consulta.error)} aoTentarDeNovo={consulta.refetch} escuro />
+            <MensagemErro
+              erro={mensagemDeErro(consulta.error)}
+              aoTentarDeNovo={consulta.refetch}
+              escuro
+            />
           ) : (
-            <EstadoVazio icone="check-circle" titulo="Fila vazia" texto="Nenhum problema esperando adoção." escuro />
+            <EstadoVazio
+              icone="check-circle"
+              titulo="Fila vazia"
+              texto="Nenhum problema esperando adoção."
+              escuro
+            />
           )
         }
         refreshControl={
-          <RefreshControl refreshing={consulta.isRefetching} onRefresh={consulta.refetch} tintColor={cores.amarelo} colors={[cores.asfalto]} />
+          <RefreshControl
+            refreshing={consulta.isRefetching}
+            onRefresh={consulta.refetch}
+            tintColor={cores.amarelo}
+            colors={[cores.asfalto]}
+          />
         }
         contentContainerStyle={estilos.conteudo}
         showsVerticalScrollIndicator={false}
@@ -145,7 +186,13 @@ const estilos = StyleSheet.create({
   tela: { flex: 1, backgroundColor: cores.asfalto },
   conteudo: { padding: 20, paddingBottom: 32 },
   topo: { gap: 14, marginBottom: 16 },
-  sobrelinha: { fontFamily: fontes.textoBold, fontSize: 12, letterSpacing: 1.4, color: cores.amarelo, textTransform: 'uppercase' },
+  sobrelinha: {
+    fontFamily: fontes.textoBold,
+    fontSize: 12,
+    letterSpacing: 1.4,
+    color: cores.amarelo,
+    textTransform: 'uppercase',
+  },
   tituloTela: { fontFamily: fontes.titulo, fontSize: 28, letterSpacing: -0.6, color: cores.papel },
   contadores: { flexDirection: 'row', gap: 8 },
   contador: { flex: 1, borderRadius: 16, paddingVertical: 12, paddingHorizontal: 10, gap: 2 },

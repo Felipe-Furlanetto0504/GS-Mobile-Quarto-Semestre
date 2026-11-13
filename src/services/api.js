@@ -8,13 +8,11 @@ export const api = axios.create({
   headers: { Accept: 'application/json' },
 });
 
-
 api.interceptors.request.use((config) => {
   const sessao = sessaoEmMemoria();
   if (sessao?.token) config.headers.Authorization = `Bearer ${sessao.token}`;
   return config;
 });
-
 
 let aoExpirar = null;
 export function quandoSessaoExpirar(callback) {
@@ -30,21 +28,19 @@ api.interceptors.response.use(
   }
 );
 
-
 export function mensagemDeErro(erro) {
-  if (erro?.code === 'ECONNABORTED') return 'O servidor demorou para responder. Tente de novo em instantes.';
+  if (erro?.code === 'ECONNABORTED')
+    return 'O servidor demorou para responder. Tente de novo em instantes.';
   if (!erro?.response) return 'Sem conexão com o servidor. Confira sua internet.';
   const dados = erro.response.data;
   if (dados?.campos?.length) return dados.campos[0].mensagem;
   return dados?.mensagem || 'Algo deu errado. Tente novamente.';
 }
 
-
 export function errosPorCampo(erro) {
   const campos = erro?.response?.data?.campos ?? [];
   return Object.fromEntries(campos.map((c) => [c.campo, c.mensagem]));
 }
-
 
 export function urlFoto(problemaId) {
   return `${API_URL}/problemas/${problemaId}/foto`;
@@ -54,7 +50,6 @@ export function cabecalhosAuth() {
   const sessao = sessaoEmMemoria();
   return sessao?.token ? { Authorization: `Bearer ${sessao.token}` } : {};
 }
-
 
 export async function acordarServidor() {
   const inicio = Date.now();

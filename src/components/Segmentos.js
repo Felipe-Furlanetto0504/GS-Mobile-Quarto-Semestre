@@ -6,7 +6,10 @@ import { cores, fontes, molas } from '../theme';
 
 export function Segmentos({ opcoes, valor, aoMudar }) {
   const [largura, setLargura] = useState(0);
-  const indice = Math.max(0, opcoes.findIndex((o) => o.valor === valor));
+  const indice = Math.max(
+    0,
+    opcoes.findIndex((o) => o.valor === valor)
+  );
   const larguraItem = largura / opcoes.length;
 
   const estiloIndicador = useAnimatedStyle(() => ({
@@ -15,7 +18,11 @@ export function Segmentos({ opcoes, valor, aoMudar }) {
   }));
 
   return (
-    <View style={estilos.trilho} onLayout={(e) => setLargura(e.nativeEvent.layout.width - 8)} accessibilityRole="tablist">
+    <View
+      style={estilos.trilho}
+      onLayout={(e) => setLargura(e.nativeEvent.layout.width - 8)}
+      accessibilityRole="tablist"
+    >
       {largura > 0 ? <Animated.View style={[estilos.indicador, estiloIndicador]} /> : null}
       {opcoes.map((o) => {
         const ativo = o.valor === valor;

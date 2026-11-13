@@ -13,7 +13,12 @@ export function SeletorDeLocal({ rotulo = 'Endereço', local, aoMudar, erro, aju
 
   const usarGps = async () => {
     const r = await obterAtual();
-    if (r) aoMudar({ endereco: r.endereco || local.endereco, latitude: r.latitude, longitude: r.longitude });
+    if (r)
+      aoMudar({
+        endereco: r.endereco || local.endereco,
+        latitude: r.latitude,
+        longitude: r.longitude,
+      });
   };
 
   const buscar = async () => {
@@ -36,8 +41,24 @@ export function SeletorDeLocal({ rotulo = 'Endereço', local, aoMudar, erro, aju
       />
       {ajuda ? <Text style={estilos.ajuda}>{ajuda}</Text> : null}
       <View style={estilos.botoes}>
-        <Botao titulo="Usar meu GPS" icone="crosshair" variante="contorno" pequeno onPress={usarGps} carregando={buscando} style={{ flex: 1 }} />
-        <Botao titulo="Buscar endereço" icone="search" variante="contorno" pequeno onPress={buscar} desabilitado={buscando} style={{ flex: 1 }} />
+        <Botao
+          titulo="Usar meu GPS"
+          icone="crosshair"
+          variante="contorno"
+          pequeno
+          onPress={usarGps}
+          carregando={buscando}
+          style={{ flex: 1 }}
+        />
+        <Botao
+          titulo="Buscar endereço"
+          icone="search"
+          variante="contorno"
+          pequeno
+          onPress={buscar}
+          desabilitado={buscando}
+          style={{ flex: 1 }}
+        />
       </View>
       {erroGps ? <Text style={estilos.erro}>{erroGps}</Text> : null}
       {temCoordenadas ? (
@@ -45,16 +66,21 @@ export function SeletorDeLocal({ rotulo = 'Endereço', local, aoMudar, erro, aju
           <View style={estilos.ok}>
             <Feather name="check-circle" size={16} color={cores.sucesso} />
             <Text style={estilos.okTexto}>
-              Localização definida ({Number(local.latitude).toFixed(4)}, {Number(local.longitude).toFixed(4)})
+              Localização definida ({Number(local.latitude).toFixed(4)},{' '}
+              {Number(local.longitude).toFixed(4)})
             </Text>
           </View>
           <Animated.View entering={FadeIn.delay(100)}>
             <Mapa
               key={`${local.latitude},${local.longitude}`}
               centro={{ latitude: Number(local.latitude), longitude: Number(local.longitude) }}
-              marcadores={[{ id: 'eu', latitude: local.latitude, longitude: local.longitude, destaque: true }]}
+              marcadores={[
+                { id: 'eu', latitude: local.latitude, longitude: local.longitude, destaque: true },
+              ]}
               altura={150}
-              aoMoverPino={(c) => aoMudar({ ...local, latitude: c.latitude, longitude: c.longitude })}
+              aoMoverPino={(c) =>
+                aoMudar({ ...local, latitude: c.latitude, longitude: c.longitude })
+              }
             />
           </Animated.View>
         </Animated.View>

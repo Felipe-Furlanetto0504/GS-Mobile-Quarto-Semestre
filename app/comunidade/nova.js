@@ -22,7 +22,12 @@ export default function NovaComunidade() {
     setErros(e);
     if (Object.keys(e).length) return;
     criar.mutate(
-      { nome: nome.trim(), descricao: descricao.trim() || null, latitude: local.latitude, longitude: local.longitude },
+      {
+        nome: nome.trim(),
+        descricao: descricao.trim() || null,
+        latitude: local.latitude,
+        longitude: local.longitude,
+      },
       {
         onSuccess: (c) => router.replace(`/comunidade/${c.id}`),
         onError: (erro) => {
@@ -39,11 +44,36 @@ export default function NovaComunidade() {
       iconeVoltar="x"
       tituloGrande="Mais um bairro no mapa"
       descricao="Moradores a até 3 km do centro escolhido podem entrar."
-      rodape={<Botao titulo="Criar comunidade" icone="check" onPress={salvar} carregando={criar.isPending} />}
+      rodape={
+        <Botao
+          titulo="Criar comunidade"
+          icone="check"
+          onPress={salvar}
+          carregando={criar.isPending}
+        />
+      }
     >
-      <Campo rotulo="Nome" valor={nome} aoMudar={setNome} maximo={120} erro={erros.nome} placeholder="Ex.: Mooca - Rua da Mooca" />
-      <Campo rotulo="Descrição (opcional)" valor={descricao} aoMudar={setDescricao} maximo={500} multilinha />
-      <SeletorDeLocal rotulo="Centro da comunidade" local={local} aoMudar={setLocal} erro={erros.local} />
+      <Campo
+        rotulo="Nome"
+        valor={nome}
+        aoMudar={setNome}
+        maximo={120}
+        erro={erros.nome}
+        placeholder="Ex.: Mooca - Rua da Mooca"
+      />
+      <Campo
+        rotulo="Descrição (opcional)"
+        valor={descricao}
+        aoMudar={setDescricao}
+        maximo={500}
+        multilinha
+      />
+      <SeletorDeLocal
+        rotulo="Centro da comunidade"
+        local={local}
+        aoMudar={setLocal}
+        erro={erros.local}
+      />
     </TelaFormulario>
   );
 }

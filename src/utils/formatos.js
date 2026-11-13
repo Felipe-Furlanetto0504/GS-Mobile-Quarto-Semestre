@@ -1,4 +1,3 @@
-
 export function paraData(valor) {
   if (!valor) return null;
   const temFuso = /[zZ]|[+-]\d{2}:?\d{2}$/.test(valor);
@@ -19,7 +18,6 @@ export function tempoRelativo(valor) {
   if (d < 30) return `há ${d} dias`;
   return data.toLocaleDateString('pt-BR');
 }
-
 
 export function situacaoDoProblema(problema) {
   if (!problema?.adotado) return { rotulo: 'Aguardando gestor', etapa: 0 };

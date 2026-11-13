@@ -2,7 +2,10 @@ import { FlatList, RefreshControl, StyleSheet, Text, View } from 'react-native';
 import { router } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ComunidadeCard } from '../../src/features/comunidades/components/ComunidadeCard';
-import { useComunidadesProximas, useMinhasComunidades } from '../../src/features/comunidades/useComunidades';
+import {
+  useComunidadesProximas,
+  useMinhasComunidades,
+} from '../../src/features/comunidades/useComunidades';
 import { useAuth } from '../../src/features/auth/AuthContext';
 import { Mapa } from '../../src/components/Mapa';
 import { Botao } from '../../src/components/Botao';
@@ -17,15 +20,19 @@ export default function Comunidades() {
   const minhas = useMinhasComunidades();
   const proximas = useComunidadesProximas(!ehGestor);
   const consulta = ehGestor ? minhas : proximas;
-  const lista = ehGestor ? minhas.data ?? [] : proximas.data?.content ?? [];
+  const lista = ehGestor ? (minhas.data ?? []) : (proximas.data?.content ?? []);
 
   const centro =
-    usuario?.latitude != null ? { latitude: Number(usuario.latitude), longitude: Number(usuario.longitude) } : null;
+    usuario?.latitude != null
+      ? { latitude: Number(usuario.latitude), longitude: Number(usuario.longitude) }
+      : null;
 
   const topo = (
     <View style={estilos.topo}>
       <View style={{ gap: 4 }}>
-        <Text style={estilos.titulo}>{ehGestor ? 'Suas comunidades' : 'Comunidades perto de você'}</Text>
+        <Text style={estilos.titulo}>
+          {ehGestor ? 'Suas comunidades' : 'Comunidades perto de você'}
+        </Text>
         <Text style={estilos.subtitulo}>
           {ehGestor
             ? 'Toque em uma comunidade para ver o feed, os supervisionados e publicar comunicados.'
@@ -33,7 +40,13 @@ export default function Comunidades() {
         </Text>
       </View>
       {ehGestor ? (
-        <Botao titulo="Nova comunidade" icone="plus" variante="destaque" pequeno onPress={() => router.push('/comunidade/nova')} />
+        <Botao
+          titulo="Nova comunidade"
+          icone="plus"
+          variante="destaque"
+          pequeno
+          onPress={() => router.push('/comunidade/nova')}
+        />
       ) : (
         <Mapa
           centro={centro}
@@ -79,7 +92,13 @@ export default function Comunidades() {
             />
           )
         }
-        refreshControl={<RefreshControl refreshing={consulta.isRefetching} onRefresh={consulta.refetch} tintColor={cores.tinta} />}
+        refreshControl={
+          <RefreshControl
+            refreshing={consulta.isRefetching}
+            onRefresh={consulta.refetch}
+            tintColor={cores.tinta}
+          />
+        }
         contentContainerStyle={estilos.conteudo}
         showsVerticalScrollIndicator={false}
       />

@@ -23,10 +23,15 @@ export function AcordandoServidor({ falhou, aoTentarDeNovo, aoContinuar }) {
   useEffect(() => {
     if (reduzir) return;
     estrada.value = withRepeat(withTiming(1, { duration: 700, easing: Easing.linear }), -1);
-    pino.value = withRepeat(withSequence(withTiming(-14, { duration: 380 }), withTiming(0, { duration: 380 })), -1);
+    pino.value = withRepeat(
+      withSequence(withTiming(-14, { duration: 380 }), withTiming(0, { duration: 380 })),
+      -1
+    );
   }, [estrada, pino, reduzir]);
 
-  const estiloEstrada = useAnimatedStyle(() => ({ transform: [{ translateY: estrada.value * ESPACO_FAIXA }] }));
+  const estiloEstrada = useAnimatedStyle(() => ({
+    transform: [{ translateY: estrada.value * ESPACO_FAIXA }],
+  }));
   const estiloPino = useAnimatedStyle(() => ({ transform: [{ translateY: pino.value }] }));
 
   return (
@@ -44,7 +49,9 @@ export function AcordandoServidor({ falhou, aoTentarDeNovo, aoContinuar }) {
         </Animated.View>
       </View>
       <Animated.View entering={FadeIn.delay(200)} style={estilos.textos}>
-        <Text style={estilos.titulo}>{falhou ? 'Servidor fora do ar' : 'Acordando o servidor…'}</Text>
+        <Text style={estilos.titulo}>
+          {falhou ? 'Servidor fora do ar' : 'Acordando o servidor…'}
+        </Text>
         <Text style={estilos.texto}>
           {falhou
             ? 'Não conseguimos falar com a API do RootFix. Confira a internet e tente de novo.'
@@ -62,8 +69,22 @@ export function AcordandoServidor({ falhou, aoTentarDeNovo, aoContinuar }) {
 }
 
 const estilos = StyleSheet.create({
-  tela: { flex: 1, backgroundColor: cores.asfalto, alignItems: 'center', justifyContent: 'center', padding: 28, gap: 36 },
-  rua: { width: 120, height: 260, backgroundColor: cores.asfalto3, borderRadius: 24, overflow: 'hidden', alignItems: 'center' },
+  tela: {
+    flex: 1,
+    backgroundColor: cores.asfalto,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 28,
+    gap: 36,
+  },
+  rua: {
+    width: 120,
+    height: 260,
+    backgroundColor: cores.asfalto3,
+    borderRadius: 24,
+    overflow: 'hidden',
+    alignItems: 'center',
+  },
   faixas: { position: 'absolute', top: -ESPACO_FAIXA, gap: 26 },
   faixa: { width: 8, height: 44, borderRadius: 4, backgroundColor: cores.amarelo },
   pinoPosicao: { position: 'absolute', top: 96 },
@@ -82,6 +103,12 @@ const estilos = StyleSheet.create({
   pinoMiolo: { width: 16, height: 16, borderRadius: 8, backgroundColor: cores.asfalto },
   textos: { alignItems: 'center', gap: 10, alignSelf: 'stretch' },
   titulo: { fontFamily: fontes.titulo, fontSize: 24, color: cores.papel, textAlign: 'center' },
-  texto: { fontFamily: fontes.texto, fontSize: 14, lineHeight: 21, color: cores.textoClaroSuave, textAlign: 'center' },
+  texto: {
+    fontFamily: fontes.texto,
+    fontSize: 14,
+    lineHeight: 21,
+    color: cores.textoClaroSuave,
+    textAlign: 'center',
+  },
   botoes: { alignSelf: 'stretch', gap: 10, marginTop: 12 },
 });

@@ -3,7 +3,13 @@ import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, View } fr
 import { Link } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import Animated, { FadeInDown, useAnimatedStyle, useSharedValue, withSequence, withTiming } from 'react-native-reanimated';
+import Animated, {
+  FadeInDown,
+  useAnimatedStyle,
+  useSharedValue,
+  withSequence,
+  withTiming,
+} from 'react-native-reanimated';
 import { Image } from 'expo-image';
 import * as Haptics from 'expo-haptics';
 import { Campo } from '../../src/components/Campo';
@@ -54,7 +60,10 @@ export default function Login() {
   }
 
   return (
-    <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
+    <KeyboardAvoidingView
+      style={{ flex: 1 }}
+      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+    >
       <StatusBar style="light" />
       <ScrollView
         style={{ flex: 1, backgroundColor: cores.papel }}
@@ -69,7 +78,11 @@ export default function Login() {
           </View>
           <Cabecalho escuro />
           <View style={estilos.marca}>
-            <Image source={require('../../assets/images/logo.png')} style={{ width: 34, height: 34 }} contentFit="contain" />
+            <Image
+              source={require('../../assets/images/logo.png')}
+              style={{ width: 34, height: 34 }}
+              contentFit="contain"
+            />
             <Text style={estilos.marcaTexto}>RootFix</Text>
           </View>
         </View>
@@ -106,7 +119,12 @@ export default function Login() {
             </Animated.Text>
           ) : null}
 
-          <Botao titulo="Entrar" icone="arrow-right" carregando={enviando === 'form'} onPress={() => fazerLogin({ email, senha }, 'form')} />
+          <Botao
+            titulo="Entrar"
+            icone="arrow-right"
+            carregando={enviando === 'form'}
+            onPress={() => fazerLogin({ email, senha }, 'form')}
+          />
 
           <View style={estilos.divisor}>
             <View style={estilos.linha} />
@@ -126,7 +144,9 @@ export default function Login() {
                 style={estilos.cartaoDemo}
                 accessibilityLabel={`Entrar como ${titulo}`}
               >
-                <Text style={estilos.cartaoTitulo}>{enviando === chave ? 'Entrando…' : titulo}</Text>
+                <Text style={estilos.cartaoTitulo}>
+                  {enviando === chave ? 'Entrando…' : titulo}
+                </Text>
                 <Text style={estilos.cartaoSub}>{sub}</Text>
               </Pressionavel>
             ))}
@@ -166,7 +186,13 @@ const estilos = StyleSheet.create({
     transform: [{ rotate: '-12deg' }],
   },
   faixa: { width: 56, height: 8, borderRadius: 4, backgroundColor: cores.amarelo, opacity: 0.9 },
-  marca: { flexDirection: 'row', alignItems: 'center', gap: 10, paddingHorizontal: 24, marginTop: 48 },
+  marca: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 10,
+    paddingHorizontal: 24,
+    marginTop: 48,
+  },
   marcaTexto: { fontFamily: fontes.titulo, fontSize: 22, color: cores.papel },
   conteudo: { paddingHorizontal: 24, paddingTop: 28, gap: 18 },
   titulo: { fontFamily: fontes.titulo, fontSize: 28, color: cores.tinta, letterSpacing: -0.6 },
@@ -174,7 +200,12 @@ const estilos = StyleSheet.create({
   erro: { fontFamily: fontes.textoSemi, fontSize: 13, color: cores.perigo },
   divisor: { flexDirection: 'row', alignItems: 'center', gap: 10 },
   linha: { flex: 1, height: 1, backgroundColor: cores.linhaForte },
-  divisorTexto: { fontFamily: fontes.textoSemi, fontSize: 11, color: cores.suave, letterSpacing: 0.4 },
+  divisorTexto: {
+    fontFamily: fontes.textoSemi,
+    fontSize: 11,
+    color: cores.suave,
+    letterSpacing: 0.4,
+  },
   demo: { flexDirection: 'row', gap: 12 },
   cartaoDemo: {
     flex: 1,
@@ -191,5 +222,11 @@ const estilos = StyleSheet.create({
   cartaoSub: { fontFamily: fontes.texto, fontSize: 12, color: cores.suave },
   cadastro: { alignItems: 'center', gap: 8, marginTop: 4 },
   cadastroTexto: { fontFamily: fontes.texto, fontSize: 14, color: cores.suave },
-  link: { fontFamily: fontes.textoBold, fontSize: 14, color: cores.tinta, textDecorationLine: 'underline', padding: 6 },
+  link: {
+    fontFamily: fontes.textoBold,
+    fontSize: 14,
+    color: cores.tinta,
+    textDecorationLine: 'underline',
+    padding: 6,
+  },
 });

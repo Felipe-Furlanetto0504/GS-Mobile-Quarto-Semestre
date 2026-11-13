@@ -29,7 +29,9 @@ export default function Avisos() {
     <SafeAreaView style={estilos.tela} edges={['top']}>
       <View style={estilos.topo}>
         <View>
-          <Text style={estilos.sobrelinha}>{naoLidas ? `${naoLidas} não lidas` : 'Tudo em dia'}</Text>
+          <Text style={estilos.sobrelinha}>
+            {naoLidas ? `${naoLidas} não lidas` : 'Tudo em dia'}
+          </Text>
           <Text style={estilos.titulo}>Avisos</Text>
         </View>
         <Botao
@@ -61,11 +63,25 @@ export default function Avisos() {
           ) : consulta.error ? (
             <MensagemErro erro={mensagemDeErro(consulta.error)} aoTentarDeNovo={consulta.refetch} />
           ) : (
-            <EstadoVazio icone="bell-off" titulo="Nenhum aviso" texto="Quando algo mudar nos seus problemas, você fica sabendo aqui." />
+            <EstadoVazio
+              icone="bell-off"
+              titulo="Nenhum aviso"
+              texto="Quando algo mudar nos seus problemas, você fica sabendo aqui."
+            />
           )
         }
-        ListFooterComponent={lista.length ? <Text style={estilos.dica}>Arraste um aviso para a esquerda para excluir</Text> : null}
-        refreshControl={<RefreshControl refreshing={consulta.isRefetching} onRefresh={consulta.refetch} tintColor={cores.tinta} />}
+        ListFooterComponent={
+          lista.length ? (
+            <Text style={estilos.dica}>Arraste um aviso para a esquerda para excluir</Text>
+          ) : null
+        }
+        refreshControl={
+          <RefreshControl
+            refreshing={consulta.isRefetching}
+            onRefresh={consulta.refetch}
+            tintColor={cores.tinta}
+          />
+        }
         contentContainerStyle={estilos.conteudo}
       />
     </SafeAreaView>
@@ -82,9 +98,28 @@ const estilos = StyleSheet.create({
     paddingTop: 12,
     paddingBottom: 8,
   },
-  sobrelinha: { fontFamily: fontes.textoSemi, fontSize: 12, letterSpacing: 0.4, color: cores.suave, textTransform: 'uppercase' },
+  sobrelinha: {
+    fontFamily: fontes.textoSemi,
+    fontSize: 12,
+    letterSpacing: 0.4,
+    color: cores.suave,
+    textTransform: 'uppercase',
+  },
   titulo: { fontFamily: fontes.titulo, fontSize: 28, letterSpacing: -0.6, color: cores.tinta },
   conteudo: { paddingHorizontal: 20, paddingBottom: 32 },
-  grupo: { fontFamily: fontes.textoBold, fontSize: 12, letterSpacing: 1, color: cores.suave, textTransform: 'uppercase', marginVertical: 10 },
-  dica: { fontFamily: fontes.texto, fontSize: 12, color: cores.suave, textAlign: 'center', marginTop: 12 },
+  grupo: {
+    fontFamily: fontes.textoBold,
+    fontSize: 12,
+    letterSpacing: 1,
+    color: cores.suave,
+    textTransform: 'uppercase',
+    marginVertical: 10,
+  },
+  dica: {
+    fontFamily: fontes.texto,
+    fontSize: 12,
+    color: cores.suave,
+    textAlign: 'center',
+    marginTop: 12,
+  },
 });
