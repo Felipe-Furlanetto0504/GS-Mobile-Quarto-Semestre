@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { ActivityIndicator, Alert, View } from 'react-native';
 import { router, useLocalSearchParams } from 'expo-router';
 import { TelaFormulario } from '../../src/components/TelaFormulario';
@@ -6,22 +6,45 @@ import { Campo } from '../../src/components/Campo';
 import { Botao } from '../../src/components/Botao';
 import { useEditarProblema, useProblema } from '../../src/features/problemas/useProblemas';
 import { errosPorCampo, mensagemDeErro } from '../../src/services/api';
+import { MensagemErro } from '../../src/components/Estados';
 import { cores } from '../../src/theme';
 
 export default function EditarProblema() {
   const { id } = useLocalSearchParams();
   const consulta = useProblema(id);
-  const editar = useEditarProblema();
-  const [titulo, setTitulo] = useState('');
-  const [descricao, setDescricao] = useState('');
-  const [erros, setErros] = useState({});
 
-  useEffect(() => {
-    if (consulta.data) {
-      setTitulo(consulta.data.titulo);
-      setDescricao(consulta.data.descricao);
-    }
-  }, [consulta.data]);
+  if (consulta.isLoading) {
+    return (
+      <View
+        style={{
+          flex: 1,
+          alignItems: 'center',
+          justifyContent: 'center',
+          backgroundColor: cores.papel,
+        }}
+      >
+        <ActivityIndicator color={cores.tinta} />
+      </View>
+    );
+  }
+
+  if (!consulta.data) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', backgroundColor: cores.papel }}>
+        <MensagemErro erro={mensagemDeErro(consulta.error)} aoTentarDeNovo={consulta.refetch} />
+      </View>
+    );
+  }
+
+  // O formulário só monta depois que o relato chega, já com os valores atuais.
+  return <FormularioEdicao id={id} problema={consulta.data} />;
+}
+
+function FormularioEdicao({ id, problema }) {
+  const editar = useEditarProblema();
+  const [titulo, setTitulo] = useState(problema.titulo);
+  const [descricao, setDescricao] = useState(problema.descricao);
+  const [erros, setErros] = useState({});
 
   function salvar() {
     const e = {};
@@ -38,21 +61,6 @@ export default function EditarProblema() {
           Alert.alert('Não foi possível salvar', mensagemDeErro(erro));
         },
       }
-    );
-  }
-
-  if (consulta.isLoading) {
-    return (
-      <View
-        style={{
-          flex: 1,
-          alignItems: 'center',
-          justifyContent: 'center',
-          backgroundColor: cores.papel,
-        }}
-      >
-        <ActivityIndicator color={cores.tinta} />
-      </View>
     );
   }
 

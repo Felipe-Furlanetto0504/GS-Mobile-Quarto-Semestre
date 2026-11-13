@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Animated, {
   FadeInDown,
@@ -23,10 +23,16 @@ export function BotaoApoio({ problema, compacto }) {
   const mutacao = useAlternarApoio();
   const pulo = useSharedValue(1);
 
-  useEffect(() => {
+  // Quando o servidor devolve números novos, troca os valores otimistas pelos reais.
+  const [doServidor, setDoServidor] = useState({
+    apoiado: problema.apoiadoPorMim,
+    total: problema.totalApoios,
+  });
+  if (doServidor.apoiado !== problema.apoiadoPorMim || doServidor.total !== problema.totalApoios) {
+    setDoServidor({ apoiado: problema.apoiadoPorMim, total: problema.totalApoios });
     setApoiado(problema.apoiadoPorMim);
     setTotal(problema.totalApoios);
-  }, [problema.apoiadoPorMim, problema.totalApoios]);
+  }
 
   const estiloIcone = useAnimatedStyle(() => ({
     transform: [{ scale: pulo.value }, { rotate: `${(pulo.value - 1) * -40}deg` }],
@@ -37,7 +43,7 @@ export function BotaoApoio({ problema, compacto }) {
     setSubindo(novo);
     setApoiado(novo);
     setTotal((t) => t + (novo ? 1 : -1));
-    pulo.value = withSequence(withSpring(1.35, molas.pulo), withSpring(1, molas.pulo));
+    pulo.set(withSequence(withSpring(1.35, molas.pulo), withSpring(1, molas.pulo)));
     Haptics.impactAsync(
       novo ? Haptics.ImpactFeedbackStyle.Light : Haptics.ImpactFeedbackStyle.Soft
     ).catch(() => {});
