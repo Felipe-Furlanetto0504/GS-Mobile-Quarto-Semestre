@@ -16,7 +16,6 @@ import { Pressionavel } from '../../../components/Pressionavel';
 import { useAlternarApoio } from '../useProblemas';
 import { cores, fontes, molas } from '../../../theme';
 
-// "Também sofri com isso": muda na hora (otimista), pula, vibra e o número rola.
 export function BotaoApoio({ problema, compacto }) {
   const [apoiado, setApoiado] = useState(problema.apoiadoPorMim);
   const [total, setTotal] = useState(problema.totalApoios);

@@ -47,11 +47,8 @@ function Aba({ rotulo, icone, ativa, badge, aoTocar, escuro }) {
   );
 }
 
-// Barra de abas própria (usada pelo <Tabs tabBar={...}> do Expo Router).
-// acaoCentral = { icone, rotulo, aoTocar } desenha o botão amarelo de "publicar" no meio.
 export function BarraDeAbas({ state, descriptors, navigation, acaoCentral, escuro }) {
   const insets = useSafeAreaInsets();
-  // Abas com href: null recebem tabBarItemStyle { display: 'none' } do Expo Router.
   const rotas = state.routes.filter((r) => descriptors[r.key].options.tabBarItemStyle?.display !== 'none');
   const metade = Math.ceil(rotas.length / 2);
 

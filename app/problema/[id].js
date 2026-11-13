@@ -82,7 +82,6 @@ export default function DetalheProblema() {
   const adotar = useAdotarProblema();
   const [texto, setTexto] = useState('');
 
-  // Parallax: a foto aumenta ao puxar para baixo e sobe mais devagar ao rolar.
   const refRolagem = useAnimatedRef();
   const rolagem = useScrollViewOffset(refRolagem);
   const estiloFoto = useAnimatedStyle(() => ({

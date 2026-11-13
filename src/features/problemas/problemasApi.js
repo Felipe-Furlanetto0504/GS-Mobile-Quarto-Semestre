@@ -1,9 +1,7 @@
 import { Platform } from 'react-native';
 import { api } from '../../services/api';
 
-// ---------- CRUD de Problema (requisito 02) ----------
 
-// CREATE: multipart/form-data com titulo, descricao, latitude, longitude e foto.
 export async function publicarProblema(comunidadeId, { titulo, descricao, latitude, longitude, foto }) {
   const form = new FormData();
   form.append('titulo', titulo);
@@ -27,7 +25,6 @@ export async function publicarProblema(comunidadeId, { titulo, descricao, latitu
   return data;
 }
 
-// READ: feed paginado. ordem = recentes | apoiados | gravidade
 export async function buscarFeed(comunidadeId, { ordem = 'recentes', page = 0, size = 10 } = {}) {
   const { data } = await api.get(`/comunidades/${comunidadeId}/problemas`, { params: { ordem, page, size } });
   return data;
@@ -38,23 +35,19 @@ export async function buscarProblema(id) {
   return data;
 }
 
-// UPDATE: só o autor, antes da adoção.
 export async function editarProblema(id, { titulo, descricao }) {
   const { data } = await api.put(`/problemas/${id}`, { titulo, descricao });
   return data;
 }
 
-// DELETE: só o autor, antes da adoção.
 export async function excluirProblema(id) {
   await api.delete(`/problemas/${id}`);
 }
 
-// ---------- Interações ----------
 
-// POST alterna: se já apoiou, remove o apoio.
 export async function alternarApoio(id) {
   const { data } = await api.post(`/problemas/${id}/apoios`);
-  return data; // { problemaId, totalApoios, apoiadoPorMim }
+  return data;
 }
 
 export async function buscarObservacoes(id) {
@@ -71,7 +64,6 @@ export async function excluirObservacao(observacaoId) {
   await api.delete(`/observacoes/${observacaoId}`);
 }
 
-// ---------- Gestor ----------
 
 export async function buscarTriagem({ page = 0, size = 20 } = {}) {
   const { data } = await api.get('/triagem', { params: { page, size } });

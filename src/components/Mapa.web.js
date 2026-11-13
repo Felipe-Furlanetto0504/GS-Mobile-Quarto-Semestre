@@ -2,7 +2,6 @@ import { StyleSheet, Text, View } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { cores, fontes, raio } from '../theme';
 
-// react-native-maps não roda no navegador: no expo web mostramos só as coordenadas.
 export function Mapa({ centro, altura = 200, style }) {
   return (
     <View style={[estilos.caixa, { height: altura }, style]}>

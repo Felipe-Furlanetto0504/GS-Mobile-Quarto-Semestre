@@ -17,7 +17,6 @@ function Segmento({ aceso, cor, ordem }) {
   );
 }
 
-// Card escuro com o resultado do Gemini: medidor de 4 níveis + justificativa.
 export function AnaliseIA({ problema }) {
   const g = gravidades[problema.gravidadeIa];
   const ordem = ['BAIXA', 'MEDIA', 'ALTA', 'CRITICA'];

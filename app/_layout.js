@@ -23,7 +23,7 @@ const queryClient = new QueryClient({
 
 // Antes de abrir o app, chama /actuator/health para acordar a API no Render.
 function useServidor() {
-  const [estado, setEstado] = useState('acordando'); // acordando | lento | pronto | falhou
+  const [estado, setEstado] = useState('acordando'); 
 
   const tentar = useCallback(() => {
     setEstado('acordando');
@@ -74,12 +74,10 @@ function Navegacao({ fontesProntas }) {
       >
         <Stack.Screen name="index" />
 
-        {/* Só aparece para quem NÃO está logado */}
         <Stack.Protected guard={!logado}>
           <Stack.Screen name="(auth)" options={{ animation: 'fade' }} />
         </Stack.Protected>
 
-        {/* Só aparece para quem está logado (morador ou gestor) */}
         <Stack.Protected guard={logado}>
           <Stack.Screen name="(abas)" options={{ animation: 'fade' }} />
           <Stack.Screen name="problema/[id]" />

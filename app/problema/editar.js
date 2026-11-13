@@ -8,7 +8,6 @@ import { useEditarProblema, useProblema } from '../../src/features/problemas/use
 import { errosPorCampo, mensagemDeErro } from '../../src/services/api';
 import { cores } from '../../src/theme';
 
-// UPDATE do CRUD: só título e descrição, e só antes da adoção.
 export default function EditarProblema() {
   const { id } = useLocalSearchParams();
   const consulta = useProblema(id);

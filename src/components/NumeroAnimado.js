@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { Text } from 'react-native';
 import { useReducedMotion } from 'react-native-reanimated';
 
-// Número que "sobe" de 0 até o valor (usado nos contadores da triagem).
 export function NumeroAnimado({ valor = 0, duracao = 700, style }) {
   const reduzir = useReducedMotion();
   const [mostrado, setMostrado] = useState(reduzir ? valor : 0);

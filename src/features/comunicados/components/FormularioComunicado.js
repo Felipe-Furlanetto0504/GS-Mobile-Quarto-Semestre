@@ -5,7 +5,6 @@ import { Campo } from '../../../components/Campo';
 import { Botao } from '../../../components/Botao';
 import { cores, fontes, raio } from '../../../theme';
 
-// Usado em "novo" e "editar" comunicado.
 export function FormularioComunicado({ titulo, inicial, aoSalvar, salvando, errosApi = {} }) {
   const [form, setForm] = useState({
     titulo: inicial?.titulo ?? '',

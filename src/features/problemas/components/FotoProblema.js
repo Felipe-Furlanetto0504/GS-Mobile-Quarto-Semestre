@@ -13,7 +13,6 @@ import { Feather } from '@expo/vector-icons';
 import { cabecalhosAuth, urlFoto } from '../../../services/api';
 import { cores, fontes } from '../../../theme';
 
-// Linha amarela que "escaneia" a foto enquanto a IA classifica.
 function LinhaDeScan({ altura }) {
   const reduzir = useReducedMotion();
   const posicao = useSharedValue(0);
@@ -30,7 +29,6 @@ function LinhaDeScan({ altura }) {
   );
 }
 
-// Foto do problema vinda da API (o endpoint exige o token, por isso os headers).
 export function FotoProblema({ problema, altura = 160, uriLocal, analisando, arredondado = 0, style }) {
   const [falhou, setFalhou] = useState(false);
   const temFoto = uriLocal || (problema?.temFoto && !falhou);

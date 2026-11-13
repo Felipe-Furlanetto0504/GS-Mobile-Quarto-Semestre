@@ -5,7 +5,6 @@ import { cores, fontes } from '../../../theme';
 
 const ETAPAS = ['Publicado', 'Adotado', 'Em andamento', 'Resolvido'];
 
-// Andamento do problema. "Adotado" vem da API Java; os outros status vêm do painel .NET.
 export function LinhaDoTempo({ problema }) {
   const { etapa } = situacaoDoProblema(problema);
   const atual = problema.adotado ? etapa : 0;

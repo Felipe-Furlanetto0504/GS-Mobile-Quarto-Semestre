@@ -2,7 +2,6 @@ import { StyleSheet, Text } from 'react-native';
 import Animated, { ZoomIn } from 'react-native-reanimated';
 import { cores, fontes, gravidades } from '../../../theme';
 
-// Selo de gravidade dado pela IA. Quando chega, entra com um "pop".
 export function GravidadeChip({ gravidade, prefixo = 'IA · ', escuro, style }) {
   const g = gravidades[gravidade];
   if (!g) {

@@ -1,4 +1,4 @@
-// A API manda LocalDateTime sem fuso ("2026-11-11T20:15:00"), no horário de São Paulo.
+
 export function paraData(valor) {
   if (!valor) return null;
   const temFuso = /[zZ]|[+-]\d{2}:?\d{2}$/.test(valor);
@@ -20,7 +20,7 @@ export function tempoRelativo(valor) {
   return data.toLocaleDateString('pt-BR');
 }
 
-// Juntando "adotado" (Java) com "status" (alterado pelo painel .NET).
+
 export function situacaoDoProblema(problema) {
   if (!problema?.adotado) return { rotulo: 'Aguardando gestor', etapa: 0 };
   switch (problema.status) {

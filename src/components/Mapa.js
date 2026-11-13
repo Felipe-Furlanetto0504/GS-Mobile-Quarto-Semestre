@@ -2,8 +2,7 @@ import { StyleSheet, View } from 'react-native';
 import MapView, { Circle, Marker } from 'react-native-maps';
 import { cores, raio } from '../theme';
 
-// Mapa simples: centro, marcadores e (opcional) um círculo de raio em km.
-// Toque/arraste opcional com aoMoverPino (usado na tela de publicar).
+
 export function Mapa({ centro, marcadores = [], raioKm, altura = 200, aoMoverPino, aoTocarMarcador, style }) {
   if (!centro) return <View style={[estilos.caixa, { height: altura }, style]} />;
 

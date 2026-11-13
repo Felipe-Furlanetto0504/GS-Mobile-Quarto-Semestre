@@ -11,7 +11,6 @@ function Abas() {
   const naoLidas = useNaoLidas();
   const { atual } = useComunidadeAtual();
 
-  // O morador tem o botão amarelo de publicar no meio da barra.
   const acaoCentral = ehGestor
     ? null
     : {

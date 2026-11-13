@@ -1,4 +1,4 @@
-// Nomes das fontes carregadas em app/_layout.js com expo-font.
+
 export const fontes = {
   titulo: 'Archivo_800ExtraBold',
   tituloBold: 'Archivo_700Bold',

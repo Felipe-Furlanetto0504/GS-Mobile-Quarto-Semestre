@@ -4,7 +4,6 @@ import Animated, { useAnimatedStyle, withSpring } from 'react-native-reanimated'
 import { Pressionavel } from './Pressionavel';
 import { cores, fontes, molas } from '../theme';
 
-// Controle segmentado com o "fundo branco" deslizando até a opção escolhida.
 export function Segmentos({ opcoes, valor, aoMudar }) {
   const [largura, setLargura] = useState(0);
   const indice = Math.max(0, opcoes.findIndex((o) => o.valor === valor));
@@ -37,7 +36,6 @@ export function Segmentos({ opcoes, valor, aoMudar }) {
   );
 }
 
-// Fileira de chips (ex.: ordenar feed).
 export function Chips({ opcoes, valor, aoMudar }) {
   return (
     <View style={estilos.chips}>

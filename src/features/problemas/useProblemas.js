@@ -19,7 +19,6 @@ export function useProblema(id) {
     queryKey: ['problema', String(id)],
     queryFn: () => problemasApi.buscarProblema(id),
     enabled: !!id,
-    // Enquanto a IA ainda não classificou a foto, perguntamos de novo a cada 4 s.
     refetchInterval: (query) => (query.state.data && !query.state.data.gravidadeIa ? 4000 : false),
   });
 }
@@ -44,7 +43,6 @@ export function useSupervisionados(comunidadeId) {
   });
 }
 
-// Depois de qualquer mudança, as listas são recarregadas em segundo plano.
 function useAtualizarListas() {
   const queryClient = useQueryClient();
   return (id) => {

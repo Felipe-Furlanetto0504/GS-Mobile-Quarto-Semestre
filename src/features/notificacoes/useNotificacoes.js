@@ -12,7 +12,6 @@ export function useNaoLidas() {
   return (data?.content ?? []).filter((n) => !n.lida).length;
 }
 
-// Remove da lista na hora (otimista) e desfaz se a API falhar.
 function useMudancaOtimista(mutationFn, aplicar) {
   const queryClient = useQueryClient();
   return useMutation({

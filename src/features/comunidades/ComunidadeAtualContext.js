@@ -1,7 +1,6 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import { useMinhasComunidades } from './useComunidades';
 
-// Guarda qual comunidade o morador está vendo no feed.
 const ComunidadeAtualContext = createContext(null);
 
 export function ComunidadeAtualProvider({ children }) {

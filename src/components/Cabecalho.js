@@ -4,7 +4,6 @@ import { Feather } from '@expo/vector-icons';
 import { Pressionavel } from './Pressionavel';
 import { cores, fontes } from '../theme';
 
-// Barra do topo para telas empilhadas (voltar + título + ação opcional à direita).
 export function Cabecalho({ titulo, subtitulo, icone = 'chevron-left', aoVoltar, direita, escuro }) {
   const corIcone = escuro ? cores.papel : cores.tinta;
   return (

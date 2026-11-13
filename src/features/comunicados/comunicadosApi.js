@@ -1,6 +1,5 @@
 import { api } from '../../services/api';
 
-// CRUD de comunicados (gestor publica, edita e exclui; todos os membros leem).
 export async function buscarComunicados(comunidadeId, { page = 0, size = 20 } = {}) {
   const { data } = await api.get(`/comunidades/${comunidadeId}/comunicados`, { params: { page, size } });
   return data;

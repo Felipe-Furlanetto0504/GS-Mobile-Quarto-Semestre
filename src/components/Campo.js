@@ -5,7 +5,6 @@ import { Feather } from '@expo/vector-icons';
 import { Pressionavel } from './Pressionavel';
 import { cores, fontes, raio } from '../theme';
 
-// Campo de texto com rótulo, contador, mensagem de erro e borda que acende ao focar.
 export const Campo = forwardRef(function Campo(
   { rotulo, erro, maximo, valor, aoMudar, senha, multilinha, style, ...props },
   ref

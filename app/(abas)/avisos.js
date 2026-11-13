@@ -8,7 +8,6 @@ import { mensagemDeErro } from '../../src/services/api';
 import { paraData } from '../../src/utils/formatos';
 import { cores, fontes } from '../../src/theme';
 
-// Separa em "Hoje" e "Antes", com um item de título entre os grupos.
 function agrupar(lista) {
   const hoje = new Date().toDateString();
   const deHoje = lista.filter((n) => paraData(n.criadaEm)?.toDateString() === hoje);

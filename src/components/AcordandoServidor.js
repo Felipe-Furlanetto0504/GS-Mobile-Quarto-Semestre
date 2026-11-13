@@ -15,7 +15,6 @@ import { cores, fontes } from '../theme';
 
 const ESPACO_FAIXA = 70;
 
-// Tela mostrada enquanto o Render "acorda" (plano gratuito dorme após 15 min).
 export function AcordandoServidor({ falhou, aoTentarDeNovo, aoContinuar }) {
   const reduzir = useReducedMotion();
   const estrada = useSharedValue(0);

@@ -8,7 +8,6 @@ import { errosPorCampo, mensagemDeErro } from '../../src/services/api';
 
 export default function EditarComunicado() {
   const { id, comunidadeId } = useLocalSearchParams();
-  // A API não tem GET de um comunicado só: pegamos da lista que já está em cache.
   const lista = useComunicados(comunidadeId);
   const editar = useEditarComunicado();
   const [errosApi, setErrosApi] = useState({});

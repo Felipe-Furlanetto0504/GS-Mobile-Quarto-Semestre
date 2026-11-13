@@ -26,7 +26,6 @@ function Faixa({ ordem }) {
   );
 }
 
-// Ilustração da boas-vindas: a faixa amarela é "pintada" e o pino cai na rua.
 export function IlustracaoRua() {
   const reduzir = useReducedMotion();
   const queda = useSharedValue(reduzir ? 0 : -220);

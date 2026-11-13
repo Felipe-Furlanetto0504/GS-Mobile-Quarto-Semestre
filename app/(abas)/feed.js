@@ -11,7 +11,6 @@ import { Pressionavel } from '../../src/components/Pressionavel';
 import { EstadoVazio, Esqueleto } from '../../src/components/Estados';
 import { cores, fontes, raio } from '../../src/theme';
 
-// Folha de baixo para trocar de comunidade.
 function TrocarComunidade({ aberto, aoFechar }) {
   const { comunidades, atual, escolher } = useComunidadeAtual();
   return (

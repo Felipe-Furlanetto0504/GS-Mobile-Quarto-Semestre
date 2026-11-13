@@ -17,8 +17,6 @@ const ORDENS = [
   { valor: 'gravidade', rotulo: 'Mais graves' },
 ];
 
-// Feed de uma comunidade: aba de problemas (paginada) e aba de comunicados.
-// Usado pelo morador (aba Feed) e pelo gestor (tela da comunidade).
 export function FeedDaComunidade({ comunidade, cabecalho, espacoInferior = 24 }) {
   const [aba, setAba] = useState('problemas');
   const [ordem, setOrdem] = useState('recentes');

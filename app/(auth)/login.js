@@ -14,7 +14,6 @@ import { useAuth } from '../../src/features/auth/AuthContext';
 import { mensagemDeErro } from '../../src/services/api';
 import { cores, fontes, raio } from '../../src/theme';
 
-// Contas criadas automaticamente pela API Java (DadosIniciais).
 const DEMO = {
   morador: { email: 'morador@rootfix.com', senha: 'Rootfix@2026' },
   gestor: { email: 'gestor@rootfix.com', senha: 'Rootfix@2026' },
@@ -29,7 +28,6 @@ export default function Login() {
   const [enviando, setEnviando] = useState(null);
   const campoSenha = useRef(null);
 
-  // Formulário "balança" quando a senha está errada.
   const tremor = useSharedValue(0);
   const estiloTremor = useAnimatedStyle(() => ({ transform: [{ translateX: tremor.value }] }));
 
@@ -42,7 +40,6 @@ export default function Login() {
     setEnviando(origem);
     try {
       await entrar(credenciais.email.trim(), credenciais.senha);
-      // O Stack.Protected do _layout troca de tela sozinho quando o login dá certo.
     } catch (e) {
       setErro(e.response?.status === 401 ? 'E-mail ou senha incorretos.' : mensagemDeErro(e));
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error).catch(() => {});

@@ -9,7 +9,6 @@ import { mensagemDeErro } from '../../src/services/api';
 import { plural } from '../../src/utils/formatos';
 import { cores, fontes, raio } from '../../src/theme';
 
-// Visão do gestor sobre uma comunidade: feed completo e comunicados (com CRUD).
 export default function ComunidadeDetalhe() {
   const { id } = useLocalSearchParams();
   const consulta = useComunidade(id);

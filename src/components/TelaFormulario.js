@@ -4,7 +4,6 @@ import Animated, { FadeInDown } from 'react-native-reanimated';
 import { Cabecalho } from './Cabecalho';
 import { cores, fontes } from '../theme';
 
-// Esqueleto comum das telas de formulário: topo, rolagem que respeita o teclado e rodapé fixo.
 export function TelaFormulario({ titulo, subtitulo, tituloGrande, descricao, iconeVoltar, rodape, children }) {
   return (
     <SafeAreaView style={estilos.tela} edges={['top', 'bottom']}>

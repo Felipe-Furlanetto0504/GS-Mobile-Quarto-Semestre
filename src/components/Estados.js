@@ -11,7 +11,6 @@ import { Feather } from '@expo/vector-icons';
 import { Botao } from './Botao';
 import { cores, fontes, raio } from '../theme';
 
-// Lista vazia, com ícone, texto e uma ação opcional.
 export function EstadoVazio({ icone = 'inbox', titulo, texto, acao, aoAcionar, escuro }) {
   return (
     <Animated.View entering={FadeIn.duration(250)} style={estilos.vazio}>
@@ -38,7 +37,6 @@ export function MensagemErro({ erro, aoTentarDeNovo, escuro }) {
   );
 }
 
-// Card "fantasma" que pulsa enquanto a lista carrega (skeleton).
 export function Esqueleto({ altura = 240, escuro }) {
   const opacidade = useSharedValue(0.5);
   useEffect(() => {

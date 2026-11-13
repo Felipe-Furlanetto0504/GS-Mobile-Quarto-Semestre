@@ -7,7 +7,6 @@ import { Mapa } from './Mapa';
 import { useLocalizacao } from '../hooks/useLocalizacao';
 import { cores, fontes, raio } from '../theme';
 
-// Campo de endereço + GPS. local = { endereco, latitude, longitude }
 export function SeletorDeLocal({ rotulo = 'Endereço', local, aoMudar, erro, ajuda }) {
   const { obterAtual, buscarEndereco, buscando, erro: erroGps } = useLocalizacao();
   const temCoordenadas = local.latitude != null && local.longitude != null;

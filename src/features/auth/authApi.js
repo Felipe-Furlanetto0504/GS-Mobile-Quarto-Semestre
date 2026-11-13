@@ -5,13 +5,11 @@ export async function entrar(email, senha) {
   return data;
 }
 
-// dados: { nome, email, senha, endereco, latitude, longitude }
 export async function registrarMorador(dados) {
   const { data } = await api.post('/auth/registro/morador', dados);
   return data;
 }
 
-// dados: { nome, email, senha, organizacao, comunidade: { nome, descricao, latitude, longitude } }
 export async function registrarGestor(dados) {
   const { data } = await api.post('/auth/registro/gestor', dados);
   return data;

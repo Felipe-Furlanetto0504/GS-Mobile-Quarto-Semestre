@@ -1,4 +1,4 @@
-// Paleta do RootFix: asfalto escuro + amarelo de faixa de pedestre.
+
 export const cores = {
   asfalto: '#14171F',
   asfalto2: '#1F2430',
@@ -24,7 +24,7 @@ export const cores = {
   sucesso: '#17694F',
 };
 
-// Cores por gravidade (mesmo enum da API Java: BAIXA, MEDIA, ALTA, CRITICA).
+// Cores por gravidade (mesmo da API Java: BAIXA, MEDIA, ALTA, CRITICA).
 export const gravidades = {
   CRITICA: { rotulo: 'Crítica', fundo: '#FCE3E0', texto: '#A52A21', barra: '#F0574B', nivel: 4 },
   ALTA: { rotulo: 'Alta', fundo: '#FDE8DA', texto: '#A5481A', barra: '#F08A4B', nivel: 3 },

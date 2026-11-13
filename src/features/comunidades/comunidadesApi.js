@@ -1,12 +1,10 @@
 import { api } from '../../services/api';
 
-// Comunidades a até 3 km do endereço do morador.
 export async function buscarProximas({ page = 0, size = 20 } = {}) {
   const { data } = await api.get('/comunidades/proximas', { params: { page, size } });
   return data;
 }
 
-// Comunidades em que participo (morador) ou que gerencio (gestor).
 export async function buscarMinhas() {
   const { data } = await api.get('/usuarios/me/comunidades');
   return data;

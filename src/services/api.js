@@ -8,14 +8,14 @@ export const api = axios.create({
   headers: { Accept: 'application/json' },
 });
 
-// Coloca o "Authorization: Bearer <token>" em toda requisição.
+
 api.interceptors.request.use((config) => {
   const sessao = sessaoEmMemoria();
   if (sessao?.token) config.headers.Authorization = `Bearer ${sessao.token}`;
   return config;
 });
 
-// Quando o token expira a API responde 401: avisamos o AuthContext para deslogar.
+
 let aoExpirar = null;
 export function quandoSessaoExpirar(callback) {
   aoExpirar = callback;
@@ -30,7 +30,7 @@ api.interceptors.response.use(
   }
 );
 
-// Transforma qualquer erro da API (ErroResponse do Spring) numa frase para o usuário.
+
 export function mensagemDeErro(erro) {
   if (erro?.code === 'ECONNABORTED') return 'O servidor demorou para responder. Tente de novo em instantes.';
   if (!erro?.response) return 'Sem conexão com o servidor. Confira sua internet.';
@@ -39,13 +39,13 @@ export function mensagemDeErro(erro) {
   return dados?.mensagem || 'Algo deu errado. Tente novamente.';
 }
 
-// Erros de validação do Bean Validation viram { campo: mensagem } para mostrar embaixo de cada input.
+
 export function errosPorCampo(erro) {
   const campos = erro?.response?.data?.campos ?? [];
   return Object.fromEntries(campos.map((c) => [c.campo, c.mensagem]));
 }
 
-// Endereço da foto de um problema (precisa do token, então usamos com cabecalhosAuth()).
+
 export function urlFoto(problemaId) {
   return `${API_URL}/problemas/${problemaId}/foto`;
 }
@@ -55,7 +55,7 @@ export function cabecalhosAuth() {
   return sessao?.token ? { Authorization: `Bearer ${sessao.token}` } : {};
 }
 
-// Chamada usada na abertura do app para "acordar" o Render.
+
 export async function acordarServidor() {
   const inicio = Date.now();
   await api.get('/actuator/health', { timeout: TEMPO_LIMITE_MS });

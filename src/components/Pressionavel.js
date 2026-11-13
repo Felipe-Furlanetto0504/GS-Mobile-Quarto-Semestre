@@ -4,7 +4,6 @@ import { molas } from '../theme';
 
 const PressableAnimado = Animated.createAnimatedComponent(Pressable);
 
-// Pressable que "afunda" um pouco ao toque. Base de todos os botões e cards clicáveis.
 export function Pressionavel({ style, escala = 0.97, onPressIn, onPressOut, disabled, children, ...props }) {
   const apertado = useSharedValue(1);
   const estiloAnimado = useAnimatedStyle(() => ({ transform: [{ scale: apertado.value }] }));

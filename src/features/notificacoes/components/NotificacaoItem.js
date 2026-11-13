@@ -9,7 +9,6 @@ import { useExcluirNotificacao, useMarcarComoLida } from '../useNotificacoes';
 import { tempoRelativo } from '../../../utils/formatos';
 import { cores, fontes, raio } from '../../../theme';
 
-// Fundo vermelho que aparece ao arrastar para a esquerda.
 function AcaoExcluir({ arrasto }) {
   const estilo = useAnimatedStyle(() => ({
     transform: [{ scale: interpolate(-arrasto.value, [0, 90], [0.6, 1], 'clamp') }],

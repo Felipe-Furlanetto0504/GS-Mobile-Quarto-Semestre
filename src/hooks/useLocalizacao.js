@@ -7,7 +7,7 @@ function montarEndereco(lugar) {
   return [rua || lugar.name, lugar.district, lugar.city || lugar.subregion].filter(Boolean).join(' - ');
 }
 
-// GPS do aparelho + conversão endereço <-> coordenadas.
+
 export function useLocalizacao() {
   const [buscando, setBuscando] = useState(false);
   const [erro, setErro] = useState(null);
@@ -30,7 +30,7 @@ export function useLocalizacao() {
     }
   }
 
-  // Localização atual + endereço aproximado.
+
   const obterAtual = () =>
     executar(async () => {
       await pedirPermissao();
@@ -41,12 +41,11 @@ export function useLocalizacao() {
         const [lugar] = await Location.reverseGeocodeAsync({ latitude, longitude });
         endereco = montarEndereco(lugar);
       } catch {
-        // sem endereço, só as coordenadas
+       
       }
       return { latitude, longitude, endereco };
     });
 
-  // Endereço digitado -> coordenadas.
   const buscarEndereco = (texto) =>
     executar(async () => {
       await pedirPermissao();

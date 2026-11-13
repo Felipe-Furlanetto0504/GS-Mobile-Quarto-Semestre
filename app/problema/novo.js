@@ -32,10 +32,8 @@ export default function PublicarProblema() {
   const [descricao, setDescricao] = useState('');
   const [erros, setErros] = useState({});
 
-  // Já tenta pegar a localização ao abrir a tela.
   useEffect(() => {
     obterAtual().then((r) => r && setLocal({ latitude: r.latitude, longitude: r.longitude, endereco: r.endereco }));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   async function escolherFoto(origem) {
@@ -73,7 +71,6 @@ export default function PublicarProblema() {
       {
         onSuccess: (criado) => {
           Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success).catch(() => {});
-          // Vai direto para o detalhe, onde a linha de "scan" roda até a IA responder.
           router.replace(`/problema/${criado.id}`);
         },
         onError: (e) => {
