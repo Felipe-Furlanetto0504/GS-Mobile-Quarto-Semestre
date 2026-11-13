@@ -1,57 +1,70 @@
-📍 RootFix Mobile
+# 📍 RootFix Mobile
 
-Aplicativo mobile de zeladoria urbana por comunidade: o morador fotografa um problema na rua (buraco, lâmpada queimada, lixo acumulado), a vizinhança apoia, a IA classifica a gravidade e o gestor da comunidade adota e acompanha a resolução. Os dados vêm de uma API REST real em Java/Spring Boot, com autenticação JWT.
+Aplicativo mobile de **zeladoria urbana por comunidade**: o morador fotografa um problema na rua (buraco, lâmpada queimada, lixo acumulado), a vizinhança apoia, a IA classifica a gravidade e o gestor da comunidade adota e acompanha a resolução. Os dados vêm de uma API REST real em Java/Spring Boot, com autenticação JWT.
 
-Desenvolvido para Mobile Application Development — FIAP · Global Solution 2026/2, tema CitizenTech · grupo Rooted.
+Desenvolvido para **Mobile Application Development** — FIAP · **Global Solution 2026/2**, tema **CitizenTech** · grupo **Rooted**.
 
-📋 Índice
-Instalar o app publicado
-Requisitos da disciplina
-Sobre o projeto
-Fluxo de um problema
-Avisos
-Telas
-Animações
-Arquitetura
-Integração com a API
-Tecnologias
-Como executar localmente
-Integrantes
-Vídeo
-📲 Instalar o app publicado
-	
-Versão	1.0.0
-Plataforma	Android (APK)
-Pacote	br.com.fiap.rootfix
-Link	a preencher
-Abra o link acima no celular Android.
-Baixe o APK e, se o Android pedir, permita a instalação de apps desta fonte.
-Abra o app e entre com uma das contas de teste.
+## 📋 Índice
 
-Primeiro acesso do dia: a API roda no plano gratuito do Render, que desliga o servidor depois de 15 minutos parado. Ao abrir, o app chama /actuator/health e mostra a tela "Acordando o servidor" (com a rua andando) até a API responder, o que pode levar até 1 minuto. Depois disso as ações são rápidas.
+- [Instalar o app publicado](#-instalar-o-app-publicado)
+- [Requisitos da disciplina](#-requisitos-da-disciplina)
+- [Sobre o projeto](#-sobre-o-projeto)
+- [Fluxo de um problema](#-fluxo-de-um-problema)
+- [Avisos](#-avisos)
+- [Telas](#-telas)
+- [Animações](#-animações)
+- [Arquitetura](#-arquitetura)
+- [Integração com a API](#-integração-com-a-api)
+- [Tecnologias](#️-tecnologias)
+- [Como executar localmente](#-como-executar-localmente)
+- [Integrantes](#-integrantes)
+- [Vídeo](#-vídeo)
 
-✅ Requisitos da disciplina
-#	Requisito	O que foi feito
-01	Telas e navegação	16 telas com Expo Router (Stack + Tabs), separadas por perfil: abas do morador e abas do gestor.
-02	CRUD com a API	Problema: POST multipart com foto, GET do feed e do detalhe, PUT para editar e DELETE para excluir, tudo com Axios. O gestor também tem CRUD de Comunicados.
-03	Autenticação	Login e cadastros na API Java, que devolve um JWT. O token fica no expo-secure-store e vai em toda requisição pelo interceptor do Axios. Quando a API responde 401, o app desloga. As rotas internas usam Stack.Protected.
-04	Estilização	Identidade própria (asfalto + amarelo de faixa de pedestre), fontes Archivo e Inter, ícone, splash e logo próprios.
-05	Arquitetura	Separação por feature: cada domínio tem a sua API, os seus hooks (TanStack Query) e os seus componentes. Nenhuma tela chama HTTP diretamente.
-06	Vídeo	Ver Vídeo.
-07	Publicação	Build Android com EAS Build. Ver Instalar o app publicado.
-📱 Sobre o projeto
+## 📲 Instalar o app publicado
 
-Problema: quem mora num bairro vê o mesmo buraco, o mesmo poste apagado e o mesmo entulho por semanas. A reclamação some num grupo de mensagens ou num protocolo da prefeitura, ninguém sabe se alguém já avisou, e o responsável não tem como saber o que é mais urgente.
+| | |
+|---|---|
+| Versão | 1.0.0 |
+| Plataforma | Android (APK) |
+| Pacote | `br.com.fiap.rootfix` |
+| Link | _a preencher_ |
 
-Solução: o RootFix organiza a zeladoria por comunidade. O morador entra nas comunidades a até 3 km de casa e publica o problema com foto e localização. Os vizinhos apoiam ("também sofri com isso") e comentam. Uma IA (Gemini, chamada pela API Java) lê a foto e dá a gravidade. O gestor da comunidade vê tudo numa fila de triagem ordenada e adota o que vai resolver. O andamento aparece para todo mundo numa linha do tempo.
+1. Abra o link acima no celular Android.
+2. Baixe o APK e, se o Android pedir, permita a instalação de apps desta fonte.
+3. Abra o app e entre com uma das [contas de teste](#contas-de-teste).
 
-Perfis
-	🏠 Morador	🏛️ Gestor
-Cadastro	Nome, e-mail, senha e endereço (vira coordenada)	Nome, e-mail, senha, organização e a primeira comunidade
-Comunidades	Entra e sai das comunidades próximas	Cria e gerencia as suas comunidades
-Problemas	Publica, edita e exclui os seus (antes da adoção), apoia e comenta	Vê a triagem da IA, adota e pede reclassificação
-Comunicados	Lê	Publica, edita e exclui
-🔄 Fluxo de um problema
+> **Primeiro acesso do dia:** a API roda no plano gratuito do Render, que desliga o servidor depois de 15 minutos parado. Ao abrir, o app chama `/actuator/health` e mostra a tela **"Acordando o servidor"** (com a rua andando) até a API responder, o que pode levar até 1 minuto. Depois disso as ações são rápidas.
+
+## ✅ Requisitos da disciplina
+
+| # | Requisito | O que foi feito |
+|---|---|---|
+| 01 | Telas e navegação | 16 telas com **Expo Router** (Stack + Tabs), separadas por perfil: abas do morador e abas do gestor. |
+| 02 | CRUD com a API | **Problema**: `POST` multipart com foto, `GET` do feed e do detalhe, `PUT` para editar e `DELETE` para excluir, tudo com **Axios**. O gestor também tem CRUD de **Comunicados**. |
+| 03 | Autenticação | Login e cadastros na API Java, que devolve um **JWT**. O token fica no `expo-secure-store` e vai em toda requisição pelo interceptor do Axios. Quando a API responde 401, o app desloga. As rotas internas usam `Stack.Protected`. |
+| 04 | Estilização | Identidade própria (asfalto + amarelo de faixa de pedestre), fontes **Archivo** e **Inter**, ícone, splash e logo próprios. |
+| 05 | Arquitetura | Separação por *feature*: cada domínio tem a sua API, os seus hooks (TanStack Query) e os seus componentes. Nenhuma tela chama HTTP diretamente. |
+| 06 | Vídeo | Ver [Vídeo](#-vídeo). |
+| 07 | Publicação | Build Android com **EAS Build**. Ver [Instalar o app publicado](#-instalar-o-app-publicado). |
+
+## 📱 Sobre o projeto
+
+**Problema:** quem mora num bairro vê o mesmo buraco, o mesmo poste apagado e o mesmo entulho por semanas. A reclamação some num grupo de mensagens ou num protocolo da prefeitura, ninguém sabe se alguém já avisou, e o responsável não tem como saber o que é mais urgente.
+
+**Solução:** o RootFix organiza a zeladoria por **comunidade**. O morador entra nas comunidades a até 3 km de casa e publica o problema com foto e localização. Os vizinhos apoiam ("também sofri com isso") e comentam. Uma IA (Gemini, chamada pela API Java) lê a foto e dá a gravidade. O gestor da comunidade vê tudo numa fila de triagem ordenada e adota o que vai resolver. O andamento aparece para todo mundo numa linha do tempo.
+
+### Perfis
+
+| | 🏠 Morador | 🏛️ Gestor |
+|---|---|---|
+| Cadastro | Nome, e-mail, senha e endereço (vira coordenada) | Nome, e-mail, senha, organização e **a primeira comunidade** |
+| Comunidades | Entra e sai das comunidades próximas | Cria e gerencia as suas comunidades |
+| Problemas | Publica, edita e exclui os seus (antes da adoção), apoia e comenta | Vê a triagem da IA, adota e pede reclassificação |
+| Comunicados | Lê | Publica, edita e exclui |
+
+## 🔄 Fluxo de um problema
+
+```
 Morador fotografa o problema e publica  (POST multipart com foto + GPS)
         │
         ▼
@@ -72,74 +85,91 @@ Gestor vê o problema na Triagem e adota
         │
         ▼
 Status é atualizado no painel .NET → linha do tempo no app
-Etapa na linha do tempo	Origem
-Aguardando gestor	Problema publicado, ainda não adotado
-Adotado	Gestor adotou na API Java
-Em andamento	Status alterado no painel .NET
-Resolvido / Arquivado	Status alterado no painel .NET
-Gravidade (IA)	Nível no medidor
-🟥 Crítica	4
-🟧 Alta	3
-🟨 Média	2
-🟩 Baixa	1
+```
 
-O autor só pode editar ou excluir o problema antes da adoção. Depois que o gestor adota, o registro fica fixo.
+| Etapa na linha do tempo | Origem |
+|---|---|
+| Aguardando gestor | Problema publicado, ainda não adotado |
+| Adotado | Gestor adotou na API Java |
+| Em andamento | Status alterado no painel .NET |
+| Resolvido / Arquivado | Status alterado no painel .NET |
 
-🔔 Avisos
+| Gravidade (IA) | Nível no medidor |
+|---|---|
+| 🟥 Crítica | 4 |
+| 🟧 Alta | 3 |
+| 🟨 Média | 2 |
+| 🟩 Baixa | 1 |
 
-Os avisos são gerados pelo backend quando algo acontece com um problema ou uma comunidade, e o app busca a lista a cada 30 s (useNotificacoes).
+O autor só pode editar ou excluir o problema **antes da adoção**. Depois que o gestor adota, o registro fica fixo.
 
-Um contador de não lidos aparece no ícone da aba Avisos.
-Os avisos de prioridade alta ganham destaque visual.
-A lista é separada em Hoje e Antes.
-Tocar num aviso marca como lido e abre o problema relacionado.
-Arrastar para a esquerda exclui o aviso. Também dá para limpar todos os já lidos de uma vez.
-📺 Telas
-🔐 Entrada
-Boas-vindas: carrossel animado apresentando o app.
-Login: com os atalhos Morador e Gestor, que entram direto nas contas de teste. O formulário "balança" quando a senha está errada.
-Cadastro de morador: endereço digitado ou pelo botão Usar meu GPS, com pino ajustável no mapa. Essa coordenada define quais comunidades aparecem como próximas.
-Cadastro de gestor: cria a conta e a primeira comunidade (com posição no mapa) no mesmo passo.
-A sessão fica salva no aparelho e expira junto com o JWT.
-🏠 Morador (abas)
-Feed: problemas da comunidade atual, paginados, ordenados por recentes, mais apoiados ou gravidade, e uma aba com os comunicados do gestor. Uma folha de baixo troca de comunidade.
-Comunidades: mapa com o raio de 3 km a partir do endereço cadastrado e lista das comunidades próximas, com distância e opção de entrar ou sair.
-➕ Publicar (botão amarelo no meio da barra): foto pela câmera ou galeria, título, descrição e local pelo GPS, com pino arrastável no mapa.
-Avisos e Perfil.
-🏛️ Gestor (abas)
-Triagem: fila da IA com contadores animados. O gestor adota o problema (o card sai para a direita) ou pede reclassificação para a IA.
-Comunidades: as que ele gerencia, mais o botão de criar uma nova.
-Avisos e Perfil.
-📄 Telas empilhadas
-Detalhe do problema: foto em parallax, análise da IA (medidor de 4 níveis + justificativa), linha do tempo, apoios e observações.
-Publicar problema e Editar problema.
-Comunidade (gestor): feed completo e comunicados com CRUD.
-Nova comunidade.
-Novo comunicado e Editar comunicado (com opção de destacar).
-👤 Perfil
-Avatar com as iniciais, perfil (morador ou gestor), e-mail, organização e endereço.
-Quantidade de comunidades em que participa ou que gerencia.
-Endereço da API em uso e versão do app.
-Sair da conta.
-✨ Animações
+## 🔔 Avisos
 
-Feitas com Reanimated 4 e Gesture Handler:
+Os avisos são gerados pelo backend quando algo acontece com um problema ou uma comunidade, e o app busca a lista a cada **30 s** (`useNotificacoes`).
 
-Botões e cards "afundam" ao toque com efeito de mola, com vibração leve (expo-haptics).
-Cards do feed entram em cascata. Enquanto carregam, as listas mostram um skeleton pulsando.
-Apoiar: o ícone pula, o número rola para cima ou para baixo e a contagem muda na hora (atualização otimista).
-IA analisando: uma linha amarela de scan desce sobre a foto até a gravidade chegar.
-Detalhe com foto em parallax.
-Na triagem, os contadores sobem de 0 até o valor e o card adotado sai para a direita.
-Tela "acordando o servidor" com a rua andando.
-Todas respeitam a opção Reduzir movimento do sistema.
-🧱 Arquitetura
+- Um contador de não lidos aparece no ícone da aba **Avisos**.
+- Os avisos de prioridade alta ganham destaque visual.
+- A lista é separada em **Hoje** e **Antes**.
+- Tocar num aviso marca como lido e abre o problema relacionado.
+- Arrastar para a esquerda exclui o aviso. Também dá para limpar todos os já lidos de uma vez.
+
+## 📺 Telas
+
+### 🔐 Entrada
+- **Boas-vindas:** carrossel animado apresentando o app.
+- **Login:** com os atalhos **Morador** e **Gestor**, que entram direto nas contas de teste. O formulário "balança" quando a senha está errada.
+- **Cadastro de morador:** endereço digitado ou pelo botão **Usar meu GPS**, com pino ajustável no mapa. Essa coordenada define quais comunidades aparecem como próximas.
+- **Cadastro de gestor:** cria a conta e a primeira comunidade (com posição no mapa) no mesmo passo.
+- A sessão fica salva no aparelho e expira junto com o JWT.
+
+### 🏠 Morador (abas)
+- **Feed:** problemas da comunidade atual, paginados, ordenados por *recentes*, *mais apoiados* ou *gravidade*, e uma aba com os comunicados do gestor. Uma folha de baixo troca de comunidade.
+- **Comunidades:** mapa com o raio de 3 km a partir do endereço cadastrado e lista das comunidades próximas, com distância e opção de entrar ou sair.
+- **➕ Publicar** (botão amarelo no meio da barra): foto pela câmera ou galeria, título, descrição e local pelo GPS, com pino arrastável no mapa.
+- **Avisos** e **Perfil**.
+
+### 🏛️ Gestor (abas)
+- **Triagem:** fila da IA com contadores animados. O gestor **adota** o problema (o card sai para a direita) ou pede **reclassificação** para a IA.
+- **Comunidades:** as que ele gerencia, mais o botão de criar uma nova.
+- **Avisos** e **Perfil**.
+
+### 📄 Telas empilhadas
+- **Detalhe do problema:** foto em parallax, análise da IA (medidor de 4 níveis + justificativa), linha do tempo, apoios e observações.
+- **Publicar problema** e **Editar problema**.
+- **Comunidade (gestor):** feed completo e comunicados com CRUD.
+- **Nova comunidade.**
+- **Novo comunicado** e **Editar comunicado** (com opção de destacar).
+
+### 👤 Perfil
+- Avatar com as iniciais, perfil (morador ou gestor), e-mail, organização e endereço.
+- Quantidade de comunidades em que participa ou que gerencia.
+- Endereço da API em uso e versão do app.
+- Sair da conta.
+
+## ✨ Animações
+
+Feitas com **Reanimated 4** e **Gesture Handler**:
+
+- Botões e cards "afundam" ao toque com efeito de mola, com vibração leve (`expo-haptics`).
+- Cards do feed entram em cascata. Enquanto carregam, as listas mostram um *skeleton* pulsando.
+- **Apoiar:** o ícone pula, o número rola para cima ou para baixo e a contagem muda na hora (atualização otimista).
+- **IA analisando:** uma linha amarela de *scan* desce sobre a foto até a gravidade chegar.
+- Detalhe com foto em **parallax**.
+- Na triagem, os contadores sobem de 0 até o valor e o card adotado sai para a direita.
+- Tela "acordando o servidor" com a rua andando.
+- Todas respeitam a opção **Reduzir movimento** do sistema.
+
+## 🧱 Arquitetura
 
 As telas só cuidam da interface. Toda chamada à API passa pelos hooks e pelo cliente HTTP:
 
+```
 app/ (telas)  →  features/*/use*.js  →  features/*/*Api.js  →  services/api.js  →  API Java (Render)
      UI          estado e cache          endpoints de cada       Axios + JWT
                  (TanStack Query)        domínio
+```
+
+```
 rootfix-mobile/
 ├── app/                              # Rotas (Expo Router): cada arquivo é uma tela
 │   ├── _layout.js                    # Providers, fontes, splash, servidor acordando, rotas protegidas
@@ -174,66 +204,77 @@ rootfix-mobile/
 │
 ├── assets/                           # Ícone, splash, ícone adaptativo e logo
 └── app.json                          # Configuração do Expo (pacote, plugins e permissões)
-🔗 Integração com a API
+```
 
-Backend: Rootfix_Java (Java + Spring Boot, Spring Security + JWT, Oracle), publicado em https://rootfix-java.onrender.com.
+## 🔗 Integração com a API
 
-Recurso	Endpoints usados pelo app
-Autenticação	POST /auth/login · POST /auth/registro/morador · POST /auth/registro/gestor · GET /usuarios/me
-Comunidades	GET /comunidades/proximas · GET /usuarios/me/comunidades · GET /comunidades/{id} · POST /comunidades · POST · DELETE /comunidades/{id}/membros
-Problemas	GET · POST /comunidades/{id}/problemas · GET · PUT · DELETE /problemas/{id} · GET /problemas/{id}/foto
-Apoios e observações	POST /problemas/{id}/apoios · GET · POST /problemas/{id}/observacoes · DELETE /observacoes/{id}
-Gestor	GET /triagem · POST /problemas/{id}/adotar · POST /problemas/{id}/reclassificar · GET /comunidades/{id}/supervisionados
-Comunicados	GET · POST /comunidades/{id}/comunicados · PUT · DELETE /comunicados/{id}
-Avisos	GET /notificacoes · PATCH /notificacoes/{id}/lida · DELETE /notificacoes/{id} · DELETE /notificacoes/lidas
-Saúde	GET /actuator/health (acordar o servidor)
+**Backend:** [Rootfix_Java](https://github.com/joaocaetano1310/Rootfix_Java) (Java + Spring Boot, Spring Security + JWT, Oracle), publicado em **https://rootfix-java.onrender.com**.
 
-Todas as rotas, exceto login, cadastro e saúde, exigem o header Authorization: Bearer <token>. Os erros de validação do Bean Validation aparecem embaixo de cada campo do formulário.
+| Recurso | Endpoints usados pelo app |
+|---|---|
+| Autenticação | `POST /auth/login` · `POST /auth/registro/morador` · `POST /auth/registro/gestor` · `GET /usuarios/me` |
+| Comunidades | `GET /comunidades/proximas` · `GET /usuarios/me/comunidades` · `GET /comunidades/{id}` · `POST /comunidades` · `POST` · `DELETE /comunidades/{id}/membros` |
+| Problemas | `GET` · `POST /comunidades/{id}/problemas` · `GET` · `PUT` · `DELETE /problemas/{id}` · `GET /problemas/{id}/foto` |
+| Apoios e observações | `POST /problemas/{id}/apoios` · `GET` · `POST /problemas/{id}/observacoes` · `DELETE /observacoes/{id}` |
+| Gestor | `GET /triagem` · `POST /problemas/{id}/adotar` · `POST /problemas/{id}/reclassificar` · `GET /comunidades/{id}/supervisionados` |
+| Comunicados | `GET` · `POST /comunidades/{id}/comunicados` · `PUT` · `DELETE /comunicados/{id}` |
+| Avisos | `GET /notificacoes` · `PATCH /notificacoes/{id}/lida` · `DELETE /notificacoes/{id}` · `DELETE /notificacoes/lidas` |
+| Saúde | `GET /actuator/health` (acordar o servidor) |
 
-🛠️ Tecnologias
-Tecnologia	Uso
-React Native 0.86 + Expo SDK 57	App mobile
-Expo Router 57	Rotas por arquivo, Stack + Tabs e Stack.Protected
-Axios	Cliente HTTP com interceptor de JWT
-TanStack Query 5	Cache, paginação infinita, atualização otimista e consulta repetida
-Reanimated 4 + Gesture Handler	Animações e gestos (arrastar, parallax, molas)
-expo-secure-store	Token JWT guardado de forma segura
-expo-image-picker	Foto do problema (câmera ou galeria)
-expo-location	GPS e conversão endereço ↔ coordenadas
-react-native-maps	Mapa das comunidades e pino do problema
-expo-image	Foto do problema com cache e header de autenticação
-expo-haptics	Vibração ao tocar
-Archivo + Inter (Google Fonts)	Tipografia
-EAS Build	Geração do APK
-💻 Como executar localmente
+Todas as rotas, exceto login, cadastro e saúde, exigem o header `Authorization: Bearer <token>`. Os erros de validação do Bean Validation aparecem embaixo de cada campo do formulário.
 
-Pré-requisitos: Node.js 20+ e o app Expo Go no celular (ou um emulador Android).
+## 🛠️ Tecnologias
 
-bash
-git clone https://github.com/Felipe-Furlanetto0504/NOME-DO-REPOSITORIO.git
-cd NOME-DO-REPOSITORIO
+| Tecnologia | Uso |
+|---|---|
+| React Native 0.86 + Expo SDK 57 | App mobile |
+| Expo Router 57 | Rotas por arquivo, Stack + Tabs e `Stack.Protected` |
+| Axios | Cliente HTTP com interceptor de JWT |
+| TanStack Query 5 | Cache, paginação infinita, atualização otimista e consulta repetida |
+| Reanimated 4 + Gesture Handler | Animações e gestos (arrastar, parallax, molas) |
+| expo-secure-store | Token JWT guardado de forma segura |
+| expo-image-picker | Foto do problema (câmera ou galeria) |
+| expo-location | GPS e conversão endereço ↔ coordenadas |
+| react-native-maps | Mapa das comunidades e pino do problema |
+| expo-image | Foto do problema com cache e header de autenticação |
+| expo-haptics | Vibração ao tocar |
+| Archivo + Inter (Google Fonts) | Tipografia |
+| EAS Build | Geração do APK |
+
+## 💻 Como executar localmente
+
+Pré-requisitos: Node.js 20+ e o app **Expo Go** no celular (ou um emulador Android).
+
+```bash
+git clone https://github.com/Felipe-Furlanetto0504/GS-Mobile-Quarto-Semestre.git
+cd GS-Mobile-Quarto-Semestre
 npm install
 npx expo start -c
+```
 
 Escaneie o QR code com o Expo Go. Por padrão o app usa a API publicada no Render.
 
-Contas de teste
+### Contas de teste
 
 Criadas automaticamente pela API Java:
 
-Perfil	E-mail	Senha
-Morador	morador@rootfix.com	Rootfix@2026
-Gestor	gestor@rootfix.com	Rootfix@2026
+| Perfil | E-mail | Senha |
+|---|---|---|
+| Morador | `morador@rootfix.com` | `Rootfix@2026` |
+| Gestor | `gestor@rootfix.com` | `Rootfix@2026` |
 
-Na tela de login, os botões Morador e Gestor entram direto com essas contas.
+Na tela de login, os botões **Morador** e **Gestor** entram direto com essas contas.
 
-👥 Integrantes
-Nome	RM	
-Felipe Furlanetto	RM562766	@Felipe-Furlanetto0504	
-João Victor Caetano Alves da Silva	RM562074	@joaocaetano1310	
-João Victor Bueno Castelini da Silva	RM564115	@Buenozw	
-Raul Rezende Iemini Aguiar	RM564002	
-Ryan Victor da Silva Vetoriano	RM565667	
-🎥 Vídeo
+## 👥 Integrantes
 
-📺 Global Solution 2026/2: link a preencher
+| Nome | RM | GitHub |
+|---|---|---|
+| Felipe Furlanetto | RM562766 
+| João Victor Caetano Alves da Silva | RM562074 
+| João Victor Bueno Castelini da Silva | RM564115 
+| Raul Rezende Iemini Aguiar | RM564002 
+| Ryan Victor da Silva Vetoriano | RM565667 
+
+## 🎥 Vídeo
+
+📺 Global Solution 2026/2: _link a preencher_
