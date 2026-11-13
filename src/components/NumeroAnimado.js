@@ -4,10 +4,10 @@ import { useReducedMotion } from 'react-native-reanimated';
 
 export function NumeroAnimado({ valor = 0, duracao = 700, style }) {
   const reduzir = useReducedMotion();
-  const [mostrado, setMostrado] = useState(reduzir ? valor : 0);
+  const [mostrado, setMostrado] = useState(0);
 
   useEffect(() => {
-    if (reduzir) return setMostrado(valor);
+    if (reduzir) return;
     let quadro;
     const inicio = Date.now();
     const de = 0;
@@ -21,5 +21,5 @@ export function NumeroAnimado({ valor = 0, duracao = 700, style }) {
     return () => cancelAnimationFrame(quadro);
   }, [valor, duracao, reduzir]);
 
-  return <Text style={style}>{mostrado}</Text>;
+  return <Text style={style}>{reduzir ? valor : mostrado}</Text>;
 }
