@@ -36,7 +36,7 @@ export default function PublicarProblema() {
     obterAtual().then(
       (r) => r && setLocal({ latitude: r.latitude, longitude: r.longitude, endereco: r.endereco })
     );
-  }, []);
+  }, [obterAtual]);
 
   async function escolherFoto(origem) {
     if (origem === 'camera') {

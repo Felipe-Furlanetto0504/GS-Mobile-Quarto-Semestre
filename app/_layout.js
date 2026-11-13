@@ -30,8 +30,7 @@ const queryClient = new QueryClient({
 function useServidor() {
   const [estado, setEstado] = useState('acordando');
 
-  const tentar = useCallback(() => {
-    setEstado('acordando');
+  const chamarServidor = useCallback(() => {
     const aviso = setTimeout(() => setEstado((e) => (e === 'acordando' ? 'lento' : e)), 1500);
     acordarServidor()
       .then(() => setEstado('pronto'))
@@ -39,7 +38,13 @@ function useServidor() {
       .finally(() => clearTimeout(aviso));
   }, []);
 
-  useEffect(tentar, [tentar]);
+  useEffect(chamarServidor, [chamarServidor]);
+
+  const tentar = () => {
+    setEstado('acordando');
+    chamarServidor();
+  };
+
   return { estado, tentar, continuar: () => setEstado('pronto') };
 }
 
