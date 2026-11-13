@@ -7,6 +7,7 @@ Desenvolvido para **Mobile Application Development** — FIAP · **Global Soluti
 ## 📋 Índice
 
 - [Instalar o app publicado](#-instalar-o-app-publicado)
+- [Vídeo](#-vídeo)
 - [Requisitos da disciplina](#-requisitos-da-disciplina)
 - [Sobre o projeto](#-sobre-o-projeto)
 - [Fluxo de um problema](#-fluxo-de-um-problema)
@@ -17,31 +18,46 @@ Desenvolvido para **Mobile Application Development** — FIAP · **Global Soluti
 - [Integração com a API](#-integração-com-a-api)
 - [Tecnologias](#️-tecnologias)
 - [Como executar localmente](#-como-executar-localmente)
+- [Lint e formatação](#-lint-e-formatação)
+- [Gerar o APK](#-gerar-o-apk)
 - [Integrantes](#-integrantes)
-- [Vídeo](#-vídeo)
 
 ## 📲 Instalar o app publicado
 
+O app está publicado no **Firebase App Distribution**.
+
 | | |
 |---|---|
+| Link de instalação | **LINK_DO_FIREBASE** |
 | Versão | 1.0.0 |
 | Plataforma | Android (APK) |
+| Commit de referência | [`2ba29b4`](https://github.com/Felipe-Furlanetto0504/GS-Mobile-Quarto-Semestre/commit/2ba29b432e3a4f07529746197e98cdf3ca9d6c5f) |
 
-1. Abra o link acima no celular Android.
+1. Abra o link de instalação no celular Android (ou o convite recebido por e-mail) e entre com a conta Google cadastrada como tester.
 2. Baixe o APK e, se o Android pedir, permita a instalação de apps desta fonte.
 3. Abra o app e entre com uma das [contas de teste](#contas-de-teste).
 
+> **Conferir a versão:** em **Perfil → Sobre o App** aparece o hash do commit usado no build. Ele deve ser o mesmo da tabela acima. Os commits posteriores a ele alteram apenas a documentação (README), não o código do app.
+
 > **Primeiro acesso do dia:** a API roda no plano gratuito do Render, que desliga o servidor depois de 15 minutos parado. Ao abrir, o app chama `/actuator/health` e mostra a tela **"Acordando o servidor"** (com a rua andando) até a API responder, o que pode levar até 1 minuto. Depois disso as ações são rápidas.
+
+## 🎥 Vídeo
+
+📺 **Demonstração do RootFix:** LINK_DO_YOUTUBE
+
+O vídeo (até 5 minutos) mostra cadastro e login, navegação entre as telas, o CRUD de problemas e de comunicados, a tela "Sobre o App" e o logout.
 
 ## ✅ Requisitos da disciplina
 
 | # | Requisito | O que foi feito |
 |---|---|---|
-| 01 | Telas e navegação | 16 telas com **Expo Router** (Stack + Tabs), separadas por perfil: abas do morador e abas do gestor. |
+| 01 | Telas e navegação | 16 telas com **Expo Router** (Stack + Tabs), separadas por perfil: abas do morador e abas do gestor (fora a tela "Sobre o App"). |
 | 02 | CRUD com a API | **Problema**: `POST` multipart com foto, `GET` do feed e do detalhe, `PUT` para editar e `DELETE` para excluir, tudo com **Axios**. O gestor também tem CRUD de **Comunicados**. |
 | 03 | Autenticação | Login e cadastros na API Java, que devolve um **JWT**. O token fica no `expo-secure-store` e vai em toda requisição pelo interceptor do Axios. Quando a API responde 401, o app desloga. As rotas internas usam `Stack.Protected`. |
 | 04 | Estilização | Identidade própria (asfalto + amarelo de faixa de pedestre), fontes **Archivo** e **Inter**, ícone, splash e logo próprios. |
-| 05 | Arquitetura | Separação por *feature*: cada domínio tem a sua API, os seus hooks (TanStack Query) e os seus componentes. Nenhuma tela chama HTTP diretamente. |
+| 05 | Arquitetura | Separação por *feature*: cada domínio tem a sua API, os seus hooks (TanStack Query) e os seus componentes. Nenhuma tela chama HTTP diretamente. Código padronizado com **ESLint** (`eslint-config-expo`) e **Prettier**. |
+| 06 | Vídeo | Demonstração de todas as funcionalidades em até 5 minutos, no YouTube: [ver seção Vídeo](#-vídeo). |
+| 07 | Publicação | APK publicado no **Firebase App Distribution**, com o professor como tester. A tela **Sobre o App** mostra o hash do commit de referência do build. |
 
 ## 📱 Sobre o projeto
 
@@ -140,7 +156,13 @@ Os avisos são gerados pelo backend quando algo acontece com um problema ou uma 
 - Avatar com as iniciais, perfil (morador ou gestor), e-mail, organização e endereço.
 - Quantidade de comunidades em que participa ou que gerencia.
 - Endereço da API em uso e versão do app.
+- Atalho para **Sobre o App**.
 - Sair da conta.
+
+### ℹ️ Sobre o App
+- Versão do app e **hash do commit** usado no build, com link para o commit no GitHub.
+- Disciplina, entrega, endereço da API e integrantes do grupo.
+- O hash é gravado no build pelo `app.config.js` (variável `EAS_BUILD_GIT_COMMIT_HASH` no EAS Build, ou `git rev-parse HEAD` localmente).
 
 ## ✨ Animações
 
@@ -170,6 +192,7 @@ rootfix-mobile/
 ├── app/                              # Rotas (Expo Router): cada arquivo é uma tela
 │   ├── _layout.js                    # Providers, fontes, splash, servidor acordando, rotas protegidas
 │   ├── index.js                      # Manda cada perfil para a sua primeira tela
+│   ├── sobre.js                      # Sobre o App: versão e hash do commit do build
 │   ├── (auth)/                       # boas-vindas, login, cadastro-morador, cadastro-gestor
 │   ├── (abas)/                       # feed, triagem, comunidades, avisos, perfil
 │   ├── problema/                     # [id] (detalhe), novo, editar
@@ -199,7 +222,11 @@ rootfix-mobile/
 │       └── formatos.js               # Datas relativas, situação do problema, distância
 │
 ├── assets/                           # Ícone, splash, ícone adaptativo e logo
-└── app.json                          # Configuração do Expo (pacote, plugins e permissões)
+├── app.json                          # Configuração do Expo (pacote, plugins e permissões)
+├── app.config.js                     # Acrescenta o hash do commit à configuração do build
+├── eas.json                          # Perfis do EAS Build (APK de distribuição)
+├── eslint.config.js                  # ESLint (eslint-config-expo + Prettier)
+└── .prettierrc                       # Regras de formatação
 ```
 
 ## 🔗 Integração com a API
@@ -236,6 +263,8 @@ Todas as rotas, exceto login, cadastro e saúde, exigem o header `Authorization:
 | expo-haptics | Vibração ao tocar |
 | Archivo + Inter (Google Fonts) | Tipografia |
 | EAS Build | Geração do APK |
+| Firebase App Distribution | Distribuição do APK para os testers |
+| ESLint + Prettier | Padronização e formatação do código |
 
 ## 💻 Como executar localmente
 
@@ -261,16 +290,32 @@ Criadas automaticamente pela API Java:
 
 Na tela de login, os botões **Morador** e **Gestor** entram direto com essas contas.
 
+## 🧹 Lint e formatação
+
+```bash
+npm run lint          # ESLint (regras do Expo + Prettier)
+npm run lint:fix      # corrige o que for automático
+npm run format        # formata todos os arquivos com Prettier
+npm run format:check  # só confere a formatação
+```
+
+O `.gitattributes` mantém as quebras de linha em LF em qualquer sistema operacional, para o Prettier não acusar diferença no Windows.
+
+## 📦 Gerar o APK
+
+```bash
+npx eas-cli login
+npx eas-cli build -p android --profile preview
+```
+
+O perfil `preview` do `eas.json` gera um `.apk` de distribuição interna. O `requireCommit` impede o build com alterações não commitadas, garantindo que o hash mostrado em **Sobre o App** corresponda ao código do repositório. O APK gerado é publicado no Firebase App Distribution.
+
 ## 👥 Integrantes
 
-| Nome | RM 
+| Nome | RM |
 |---|---|
-| Felipe Furlanetto | RM562766 
-| João Victor Caetano Alves da Silva | RM562074 
-| João Victor Bueno Castelini da Silva | RM564115 
-| Raul Rezende Iemini Aguiar | RM564002 
-| Ryan Victor da Silva Vetoriano | RM565667 
-
-## 🎥 Vídeo
-
-📺 Global Solution 2026/2: _link a preencher_
+| Felipe Furlanetto | RM562766 |
+| João Victor Caetano Alves da Silva | RM562074 |
+| João Victor Bueno Castelini da Silva | RM564115 |
+| Raul Rezende Iemini Aguiar | RM564002 |
+| Ryan Victor da Silva Vetoriano | RM565667 |
