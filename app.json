@@ -1,29 +1,58 @@
 {
   "expo": {
-    "name": "GS-Rooted",
+    "name": "RootFix",
     "slug": "GS-Rooted",
+    "scheme": "rootfix",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
-    "splash": {
-      "image": "./assets/splash-icon.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": false,
+      "bundleIdentifier": "br.com.fiap.rootfix"
     },
     "android": {
+      "package": "br.com.fiap.rootfix",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#14171F"
       },
       "edgeToEdgeEnabled": true
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/favicon.png",
+      "bundler": "metro"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/splash-icon.png",
+          "imageWidth": 160,
+          "resizeMode": "contain",
+          "backgroundColor": "#14171F"
+        }
+      ],
+      "expo-font",
+      "expo-secure-store",
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "O RootFix usa suas fotos para mostrar o problema que você relatou.",
+          "cameraPermission": "O RootFix usa a câmera para fotografar o problema na rua."
+        }
+      ],
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "O RootFix usa sua localização para marcar onde está o problema."
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": false
     }
   }
 }
