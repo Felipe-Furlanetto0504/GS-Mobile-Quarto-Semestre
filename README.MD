@@ -267,8 +267,8 @@ Na tela de login, os botões **Morador** e **Gestor** entram direto com essas co
 
 ## 👥 Integrantes
 
-| Nome | RM | GitHub |
-|---|---|---|
+| Nome | RM 
+|---|---|
 | Felipe Furlanetto | RM562766 
 | João Victor Caetano Alves da Silva | RM562074 
 | João Victor Bueno Castelini da Silva | RM564115 
