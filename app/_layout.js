@@ -83,6 +83,7 @@ function Navegacao({ fontesProntas }) {
         }}
       >
         <Stack.Screen name="index" />
+        <Stack.Screen name="sobre" />
 
         <Stack.Protected guard={!logado}>
           <Stack.Screen name="(auth)" options={{ animation: 'fade' }} />

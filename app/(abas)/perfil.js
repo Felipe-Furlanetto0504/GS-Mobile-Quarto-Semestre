@@ -3,9 +3,11 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import Animated, { FadeInDown, ZoomIn } from 'react-native-reanimated';
 import Constants from 'expo-constants';
 import { Feather } from '@expo/vector-icons';
+import { router } from 'expo-router';
 import { useAuth } from '../../src/features/auth/AuthContext';
 import { useMinhasComunidades } from '../../src/features/comunidades/useComunidades';
 import { Botao } from '../../src/components/Botao';
+import { Pressionavel } from '../../src/components/Pressionavel';
 import { API_URL } from '../../src/config';
 import { cores, fontes, raio } from '../../src/theme';
 
@@ -67,6 +69,16 @@ export default function Perfil() {
         <Animated.View entering={FadeInDown.delay(180)} style={estilos.bloco}>
           <Linha icone="server" rotulo="API" valor={API_URL} />
           <Linha icone="smartphone" rotulo="Versão do app" valor={Constants.expoConfig?.version} />
+          <Pressionavel
+            onPress={() => router.push('/sobre')}
+            accessibilityRole="button"
+            accessibilityLabel="Abrir Sobre o App"
+            style={estilos.linha}
+          >
+            <Feather name="info" size={18} color={cores.suave} />
+            <Text style={[estilos.linhaValor, { flex: 1 }]}>Sobre o App</Text>
+            <Feather name="chevron-right" size={18} color={cores.suave} />
+          </Pressionavel>
         </Animated.View>
 
         <Botao titulo="Sair da conta" variante="perigo" icone="log-out" onPress={confirmarSaida} />
