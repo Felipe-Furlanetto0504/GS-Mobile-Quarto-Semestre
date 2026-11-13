@@ -26,8 +26,6 @@ Desenvolvido para **Mobile Application Development** — FIAP · **Global Soluti
 |---|---|
 | Versão | 1.0.0 |
 | Plataforma | Android (APK) |
-| Pacote | `br.com.fiap.rootfix` |
-| Link | _a preencher_ |
 
 1. Abra o link acima no celular Android.
 2. Baixe o APK e, se o Android pedir, permita a instalação de apps desta fonte.
