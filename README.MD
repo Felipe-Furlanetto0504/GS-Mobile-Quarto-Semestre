@@ -42,8 +42,6 @@ Desenvolvido para **Mobile Application Development** — FIAP · **Global Soluti
 | 03 | Autenticação | Login e cadastros na API Java, que devolve um **JWT**. O token fica no `expo-secure-store` e vai em toda requisição pelo interceptor do Axios. Quando a API responde 401, o app desloga. As rotas internas usam `Stack.Protected`. |
 | 04 | Estilização | Identidade própria (asfalto + amarelo de faixa de pedestre), fontes **Archivo** e **Inter**, ícone, splash e logo próprios. |
 | 05 | Arquitetura | Separação por *feature*: cada domínio tem a sua API, os seus hooks (TanStack Query) e os seus componentes. Nenhuma tela chama HTTP diretamente. |
-| 06 | Vídeo | Ver [Vídeo](#-vídeo). |
-| 07 | Publicação | Build Android com **EAS Build**. Ver [Instalar o app publicado](#-instalar-o-app-publicado). |
 
 ## 📱 Sobre o projeto
 
