@@ -1,13 +1,17 @@
 import { StyleSheet, Text, View } from 'react-native';
 import { Feather } from '@expo/vector-icons';
-import { situacaoDoProblema } from '../../../utils/formatos';
 import { cores, fontes } from '../../../theme';
 
-const ETAPAS = ['Publicado', 'Adotado', 'Em andamento', 'Resolvido'];
+const ETAPAS = ['Publicado', 'Analisado', 'Adotado'];
+
+function etapaAtual(problema) {
+  if (problema.adotado) return 2;
+  if (problema.gravidadeIa) return 1;
+  return 0;
+}
 
 export function LinhaDoTempo({ problema }) {
-  const { etapa } = situacaoDoProblema(problema);
-  const atual = problema.adotado ? etapa : 0;
+  const atual = etapaAtual(problema);
 
   return (
     <View style={estilos.caixa} accessible accessibilityLabel={`Andamento: ${ETAPAS[atual]}`}>

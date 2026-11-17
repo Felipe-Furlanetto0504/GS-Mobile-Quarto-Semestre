@@ -32,7 +32,17 @@ export function useObservacoes(id) {
 }
 
 export function useTriagem() {
-  return useQuery({ queryKey: ['triagem'], queryFn: () => problemasApi.buscarTriagem() });
+  return useQuery({
+    queryKey: ['triagem'],
+    queryFn: () => problemasApi.buscarTriagem(),
+    refetchInterval: (query) => {
+      const d = query.state.data;
+      if (!d) return false;
+      const pendentes =
+        (d.semClassificacao ?? 0) > 0 || (d.problemas?.content ?? []).some((p) => !p.gravidadeIa);
+      return pendentes ? 4000 : false;
+    },
+  });
 }
 
 export function useSupervisionados(comunidadeId) {

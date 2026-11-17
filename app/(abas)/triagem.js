@@ -1,5 +1,6 @@
+import { useCallback, useRef } from 'react';
 import { Alert, FlatList, RefreshControl, StyleSheet, Text, View } from 'react-native';
-import { router, useIsFocused } from 'expo-router';
+import { router, useFocusEffect, useIsFocused } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Animated, { FadeInDown, LinearTransition, SlideOutRight } from 'react-native-reanimated';
@@ -107,6 +108,18 @@ function ItemTriagem({ problema, indice, primeiro }) {
 export default function Triagem() {
   const consulta = useTriagem();
   const focada = useIsFocused();
+
+
+  const primeiraVez = useRef(true);
+  useFocusEffect(
+    useCallback(() => {
+      if (primeiraVez.current) {
+        primeiraVez.current = false;
+        return;
+      }
+      consulta.refetch();
+    }, [consulta.refetch])
+  );
   const dados = consulta.data;
   const fila = (dados?.problemas?.content ?? []).filter((p) => !p.adotado);
 

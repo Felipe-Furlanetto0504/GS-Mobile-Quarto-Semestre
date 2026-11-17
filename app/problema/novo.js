@@ -1,19 +1,17 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Alert, StyleSheet, Text, View } from 'react-native';
 import { router, useLocalSearchParams } from 'expo-router';
-import Animated, { FadeIn, ZoomIn } from 'react-native-reanimated';
+import Animated, { ZoomIn } from 'react-native-reanimated';
 import * as ImagePicker from 'expo-image-picker';
 import * as Haptics from 'expo-haptics';
 import { Feather } from '@expo/vector-icons';
 import { TelaFormulario } from '../../src/components/TelaFormulario';
 import { Campo } from '../../src/components/Campo';
 import { Botao } from '../../src/components/Botao';
-import { Mapa } from '../../src/components/Mapa';
 import { Pressionavel } from '../../src/components/Pressionavel';
 import { FotoProblema } from '../../src/features/problemas/components/FotoProblema';
 import { usePublicarProblema } from '../../src/features/problemas/useProblemas';
 import { useComunidade } from '../../src/features/comunidades/useComunidades';
-import { useLocalizacao } from '../../src/hooks/useLocalizacao';
 import { errosPorCampo, mensagemDeErro } from '../../src/services/api';
 import { cores, fontes, raio } from '../../src/theme';
 
@@ -24,19 +22,11 @@ export default function PublicarProblema() {
   const { comunidadeId } = useLocalSearchParams();
   const comunidade = useComunidade(comunidadeId);
   const publicar = usePublicarProblema();
-  const { obterAtual, buscando, erro: erroGps } = useLocalizacao();
 
   const [foto, setFoto] = useState(null);
-  const [local, setLocal] = useState(null);
   const [titulo, setTitulo] = useState('');
   const [descricao, setDescricao] = useState('');
   const [erros, setErros] = useState({});
-
-  useEffect(() => {
-    obterAtual().then(
-      (r) => r && setLocal({ latitude: r.latitude, longitude: r.longitude, endereco: r.endereco })
-    );
-  }, [obterAtual]);
 
   async function escolherFoto(origem) {
     if (origem === 'camera') {
@@ -61,7 +51,9 @@ export default function PublicarProblema() {
     const e = {};
     if (!titulo.trim()) e.titulo = 'Informe o título.';
     if (!descricao.trim()) e.descricao = 'Descreva o problema.';
-    if (!local) e.local = 'Precisamos da localização do problema.';
+    const c = comunidade.data;
+    if (c?.latitude == null || c?.longitude == null)
+      e.titulo = e.titulo || 'Aguarde a comunidade carregar e tente de novo.';
     setErros(e);
     return Object.keys(e).length === 0;
   }
@@ -74,8 +66,9 @@ export default function PublicarProblema() {
         dados: {
           titulo: titulo.trim(),
           descricao: descricao.trim(),
-          latitude: local.latitude,
-          longitude: local.longitude,
+          // Sem GPS: o problema é registrado no ponto central da comunidade.
+          latitude: Number(comunidade.data.latitude),
+          longitude: Number(comunidade.data.longitude),
           foto,
         },
       },
@@ -164,49 +157,6 @@ export default function PublicarProblema() {
         </View>
       )}
 
-      <View style={{ gap: 8 }}>
-        <View style={estilos.localTopo}>
-          <Text style={estilos.rotulo}>Local do problema</Text>
-          <Pressionavel
-            onPress={() => obterAtual().then((r) => r && setLocal(r))}
-            accessibilityLabel="Atualizar GPS"
-            style={{ padding: 4 }}
-          >
-            <Text style={estilos.link}>{buscando ? 'Buscando…' : 'Usar GPS de novo'}</Text>
-          </Pressionavel>
-        </View>
-        {local ? (
-          <Animated.View entering={FadeIn}>
-            <Mapa
-              centro={{ latitude: local.latitude, longitude: local.longitude }}
-              marcadores={[
-                {
-                  id: 'pino',
-                  latitude: local.latitude,
-                  longitude: local.longitude,
-                  destaque: true,
-                },
-              ]}
-              altura={170}
-              aoMoverPino={(c) =>
-                setLocal({ ...local, latitude: c.latitude, longitude: c.longitude })
-              }
-            />
-            <Text style={estilos.ajuda}>
-              {local.endereco ? `${local.endereco} · ` : ''}Arraste o pino ou toque no mapa para
-              ajustar.
-            </Text>
-          </Animated.View>
-        ) : (
-          <View style={estilos.semLocal}>
-            <Text style={estilos.ajuda}>
-              {buscando ? 'Pegando sua localização…' : erroGps || 'Sem localização ainda.'}
-            </Text>
-          </View>
-        )}
-        {erros.local ? <Text style={estilos.erro}>{erros.local}</Text> : null}
-      </View>
-
       <Campo
         rotulo="Título"
         valor={titulo}
@@ -245,18 +195,6 @@ const estilos = StyleSheet.create({
   },
   caixaFotoTexto: { fontFamily: fontes.textoSemi, fontSize: 13, color: cores.tintaMedia },
   linhaBotoes: { flexDirection: 'row', gap: 10 },
-  localTopo: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
-  rotulo: { fontFamily: fontes.textoSemi, fontSize: 13, color: cores.tinta },
-  link: { fontFamily: fontes.textoBold, fontSize: 13, color: cores.azul },
-  ajuda: { fontFamily: fontes.texto, fontSize: 12, color: cores.suave, marginTop: 6 },
-  semLocal: {
-    height: 80,
-    borderRadius: raio.xl,
-    backgroundColor: cores.papel2,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  erro: { fontFamily: fontes.textoMedio, fontSize: 12, color: cores.perigo },
   aviso: {
     flexDirection: 'row',
     alignItems: 'center',
