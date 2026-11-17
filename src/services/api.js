@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { API_URL, TEMPO_LIMITE_MS } from '../config';
+import { API_URL, IA_URL, TEMPO_LIMITE_IA_MS, TEMPO_LIMITE_MS } from '../config';
 import { sessaoEmMemoria } from './sessao';
 
 // eslint-disable-next-line import/no-named-as-default-member -- axios.create é a forma documentada
@@ -9,10 +9,12 @@ export const api = axios.create({
   headers: { Accept: 'application/json' },
 });
 
-api.interceptors.request.use((config) => {
-  const sessao = sessaoEmMemoria();
-  if (sessao?.token) config.headers.Authorization = `Bearer ${sessao.token}`;
-  return config;
+// Serviço de IA (Encaminhador do gestor). Recebe o mesmo token da API Java e o repassa a ela.
+// eslint-disable-next-line import/no-named-as-default-member -- axios.create é a forma documentada
+export const apiIA = axios.create({
+  baseURL: IA_URL,
+  timeout: TEMPO_LIMITE_IA_MS,
+  headers: { Accept: 'application/json' },
 });
 
 let aoExpirar = null;
@@ -20,14 +22,22 @@ export function quandoSessaoExpirar(callback) {
   aoExpirar = callback;
 }
 
-api.interceptors.response.use(
-  (resposta) => resposta,
-  (erro) => {
-    const url = erro.config?.url ?? '';
-    if (erro.response?.status === 401 && !url.startsWith('/auth/') && aoExpirar) aoExpirar();
-    return Promise.reject(erro);
-  }
-);
+for (const cliente of [api, apiIA]) {
+  cliente.interceptors.request.use((config) => {
+    const sessao = sessaoEmMemoria();
+    if (sessao?.token) config.headers.Authorization = `Bearer ${sessao.token}`;
+    return config;
+  });
+
+  cliente.interceptors.response.use(
+    (resposta) => resposta,
+    (erro) => {
+      const url = erro.config?.url ?? '';
+      if (erro.response?.status === 401 && !url.startsWith('/auth/') && aoExpirar) aoExpirar();
+      return Promise.reject(erro);
+    }
+  );
+}
 
 export function mensagemDeErro(erro) {
   if (erro?.code === 'ECONNABORTED')
@@ -35,6 +45,8 @@ export function mensagemDeErro(erro) {
   if (!erro?.response) return 'Sem conexão com o servidor. Confira sua internet.';
   const dados = erro.response.data;
   if (dados?.campos?.length) return dados.campos[0].mensagem;
+  // A API Java manda a mensagem em "mensagem"; o serviço de IA (FastAPI), em "detail"
+  if (typeof dados?.detail === 'string') return dados.detail;
   return dados?.mensagem || 'Algo deu errado. Tente novamente.';
 }
 

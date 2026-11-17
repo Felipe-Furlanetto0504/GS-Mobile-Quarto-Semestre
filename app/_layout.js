@@ -99,6 +99,7 @@ function Navegacao({ fontesProntas }) {
           <Stack.Screen name="comunicado/editar" options={{ animation: 'slide_from_bottom' }} />
           <Stack.Protected guard={ehGestor}>
             <Stack.Screen name="comunidade/nova" options={{ animation: 'slide_from_bottom' }} />
+            <Stack.Screen name="problema/encaminhamento" />
           </Stack.Protected>
         </Stack.Protected>
       </Stack>

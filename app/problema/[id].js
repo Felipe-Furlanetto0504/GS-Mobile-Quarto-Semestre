@@ -37,6 +37,7 @@ import { GravidadeChip } from '../../src/features/problemas/components/Gravidade
 import { AnaliseIA } from '../../src/features/problemas/components/AnaliseIA';
 import { LinhaDoTempo } from '../../src/features/problemas/components/LinhaDoTempo';
 import { BotaoApoio } from '../../src/features/problemas/components/BotaoApoio';
+import { CardEncaminhar } from '../../src/features/encaminhamento/components/CardEncaminhar';
 import { Pressionavel } from '../../src/components/Pressionavel';
 import { Botao } from '../../src/components/Botao';
 import { MensagemErro } from '../../src/components/Estados';
@@ -207,6 +208,12 @@ export default function DetalheProblema() {
           <Animated.View entering={FadeInDown.delay(80).duration(300)}>
             <AnaliseIA problema={p} />
           </Animated.View>
+
+          {p.souGestor && p.adotado ? (
+            <Animated.View entering={FadeInDown.delay(110).duration(300)}>
+              <CardEncaminhar problemaId={p.id} />
+            </Animated.View>
+          ) : null}
 
           <Animated.View entering={FadeInDown.delay(140).duration(300)} style={{ gap: 10 }}>
             <Text style={estilos.secao}>Andamento</Text>
