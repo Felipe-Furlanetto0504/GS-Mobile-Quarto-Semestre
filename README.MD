@@ -43,7 +43,7 @@ O app está publicado no **Firebase App Distribution**.
 
 ## 🎥 Vídeo
 
-📺 **Demonstração do RootFix:** LINK_DO_YOUTUBE
+📺 **Demonstração do RootFix:** https://youtu.be/6g8PwFXCxGU
 
 O vídeo (até 5 minutos) mostra cadastro e login, navegação entre as telas, o CRUD de problemas e de comunicados, a tela "Sobre o App" e o logout.
 
